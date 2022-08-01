@@ -1,0 +1,34 @@
+- name: compress files
+  description: Compress files from $env:PUBLIC\exf
+  tactic: collection
+  technique_id: T1560.001
+  technique_name: 'Archive Collected Data: Archive via Utility'
+  executors:
+  - payloads: []
+    platform: windows
+    name: psh
+    cleanup: []
+    parsers: []
+    command: '$source_dir="$env:PATH\exf";
+
+      $destination_dir="$env:PATH\";
+
+      $archive_name="data.zip";
+
+      $full_name=$source_dir+$archive_name;
+
+      Compress-archive -Path $source_dir -DestinationPath $full_name -CompressionLevel
+      Optimal;
+
+      '
+    timeout: '10'
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: false
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  delete_payload: true
+  id: Compress_all_directory_in_PowerShell
