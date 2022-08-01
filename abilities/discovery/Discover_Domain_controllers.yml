@@ -1,0 +1,43 @@
+- additional_info: {}
+  privilege: ''
+  plugin: stockpile
+  technique_name: Remote System Discovery
+  buckets:
+  - discovery
+  singleton: false
+  tactic: discovery
+  technique_id: T1018
+  access: {}
+  delete_payload: true
+  executors:
+  - platform: windows
+    command: nltest /dsgetdc:%USERDOMAIN%
+    additional_info: {}
+    code: null
+    cleanup: []
+    timeout: 60
+    parsers: []
+    variations: []
+    payloads: []
+    language: null
+    build_target: null
+    uploads: []
+    name: cmd
+  - platform: windows
+    command: nltest /dsgetdc:$env:USERDOMAIN >$env:PUBLIC\exf\Domain_controllers.txt
+    additional_info: {}
+    code: null
+    cleanup: []
+    timeout: 60
+    parsers: []
+    variations: []
+    payloads: []
+    language: null
+    build_target: null
+    uploads: []
+    name: psh
+  requirements: []
+  repeatable: false
+  description: Identify the remote domain controllers and save the information to a file
+  name: Discover domain controller
+  id: Discover_Domain_Controllers

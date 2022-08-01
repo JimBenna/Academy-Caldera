@@ -1,0 +1,37 @@
+- additional_info: {}
+  privilege: ''
+  plugin: stockpile
+  technique_name: 'Software Discovery: Security Software Discovery'
+  buckets:
+  - discovery
+  singleton: false
+  tactic: discovery
+  technique_id: T1518.001
+  access: {}
+  delete_payload: true
+  executors:
+  - platform: windows
+    command: '$NameSpace = Get-WmiObject -Namespace "root" -Class "__Namespace" |
+      Select Name | Out-String -Stream | Select-String "SecurityCenter";
+
+      $SecurityCenter = $NameSpace | Select-Object -First 1;
+
+      Get-WmiObject -Namespace "root\$SecurityCenter" -Class AntiVirusProduct | Select
+      DisplayName, InstanceGuid, PathToSignedProductExe, PathToSignedReportingExe,
+      ProductState, Timestamp | Format-List >$env:PUBLIC\exf\Firewall_Info.txt;'
+    additional_info: {}
+    code: null
+    cleanup: []
+    timeout: 60
+    parsers: []
+    variations: []
+    payloads: []
+    language: null
+    build_target: null
+    uploads: []
+    name: psh
+  requirements: []
+  repeatable: false
+  description: Identify Firewalls
+  name: Identify Firewalls
+  id: Identify_Firewalls

@@ -1,0 +1,37 @@
+- additional_info: {}
+  privilege: ''
+  plugin: stockpile
+  technique_name: 'Software Discovery: Security Software Discovery'
+  buckets:
+  - discovery
+  singleton: false
+  tactic: discovery
+  technique_id: T1518.001
+  access: {}
+  delete_payload: true
+  executors:
+  - platform: windows
+    command: wmic /NAMESPACE:\\root\SecurityCenter2 PATH AntiVirusProduct GET /value
+      >$env:PUBLIC\exf\av_product.txt
+    additional_info: {}
+    code: null
+    cleanup: []
+    timeout: 60
+    parsers:
+    - parserconfigs:
+      - source: host.installed.av
+        target: ''
+        edge: ''
+        custom_parser_vals: {}
+      module: plugins.stockpile.app.parsers.basic
+    variations: []
+    payloads: []
+    language: null
+    build_target: null
+    uploads: []
+    name: psh
+  requirements: []
+  repeatable: false
+  description: Identify AV
+  name: Discover antivirus programs
+  id: Discover_AV_Programms

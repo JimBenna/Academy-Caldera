@@ -1,0 +1,59 @@
+- additional_info: {}
+  privilege: ''
+  plugin: stockpile
+  technique_name: Network Share Discovery
+  buckets:
+  - discovery
+  singleton: false
+  tactic: discovery
+  technique_id: T1135
+  access: {}
+  delete_payload: true
+  executors:
+  - platform: windows
+    command: Get-SmbShare | ConvertTo-Json
+    additional_info: {}
+    code: null
+    cleanup: []
+    timeout: 60
+    parsers:
+    - parserconfigs:
+      - source: domain.smb.share
+        target: ''
+        edge: ''
+        custom_parser_vals:
+          json_key: Path
+          json_type: str
+      module: plugins.stockpile.app.parsers.json
+    variations: []
+    payloads: []
+    language: null
+    build_target: null
+    uploads: []
+    name: pwsh
+  - platform: windows
+    command: Get-SmbShare | ConvertTo-Json >$env:PUBLIC\exf\smbshares.txt
+    additional_info: {}
+    code: null
+    cleanup: []
+    timeout: 60
+    parsers:
+    - parserconfigs:
+      - source: domain.smb.share
+        target: ''
+        edge: ''
+        custom_parser_vals:
+          json_key: Path
+          json_type: str
+      module: plugins.stockpile.app.parsers.json
+    variations: []
+    payloads: []
+    language: null
+    build_target: null
+    uploads: []
+    name: psh
+  requirements: []
+  repeatable: false
+  description: Network Share Discovery
+  name: View Samba shares
+  id: view_samba_shares

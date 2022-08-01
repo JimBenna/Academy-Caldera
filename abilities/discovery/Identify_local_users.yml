@@ -1,0 +1,30 @@
+- additional_info: {}
+  privilege: ''
+  plugin: stockpile
+  technique_name: 'Account Discovery: Local Account'
+  buckets:
+  - discovery
+  singleton: false
+  tactic: discovery
+  technique_id: T1087.001
+  access: {}
+  delete_payload: true
+  executors:
+  - platform: windows
+    command: Get-WmiObject -Class Win32_UserAccount >$env:PUBLIC\exf\local_users.txt
+    additional_info: {}
+    code: null
+    cleanup: []
+    timeout: 60
+    parsers: []
+    variations: []
+    payloads: []
+    language: null
+    build_target: null
+    uploads: []
+    name: psh
+  requirements: []
+  repeatable: false
+  description: Identify all local users and save a local file
+  name: list all users
+  id: Identify_local_users

