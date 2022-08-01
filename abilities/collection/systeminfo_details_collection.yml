@@ -1,0 +1,22 @@
+- name: systeminfo details
+  description: Collects all systeminfo command details in a file
+  tactic: collection
+  technique_id: automated-collection
+  technique_name: T1119
+  executors:
+  - payloads: []
+    platform: windows
+    name: cmd
+    cleanup: []
+    parsers: []
+    command: systeminfo /fo list >%PUBLIC%\exf\systeminfo.txt
+    timeout: '10'
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: true
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  id: systeminfo_details_collection
