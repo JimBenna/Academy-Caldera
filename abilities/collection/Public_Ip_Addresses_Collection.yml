@@ -1,0 +1,32 @@
+- additional_info:
+    cleanup: '[]'
+  privilege: ''
+  plugin: ''
+  technique_name: System Network Configuration Discovery
+  buckets: []
+  singleton: false
+  tactic: collection
+  technique_id: T1134.001
+  access: {}
+  delete_payload: true
+  executors:
+  - platform: windows
+    command: 'Invoke-RestMethod -Uri http://whatismyip.akamai.com -Outfile $env:PUBLIC\exf\pub-ipv4.txt;
+
+      Invoke-RestMethod -Uri http://ipv6.whatismyip.akamai.com -Outfile $env:PUBLIC\exf\pub-ipv6.txt;'
+    additional_info: {}
+    code: null
+    cleanup: []
+    timeout: 60
+    parsers: []
+    variations: []
+    payloads: []
+    language: null
+    build_target: null
+    uploads: []
+    name: psh
+  requirements: []
+  repeatable: false
+  description: collect public IPv4 and IPv6 addresess
+  name: Public IP addresses
+  id: Public_Ip_Addresses_Collection

@@ -1,0 +1,32 @@
+- additional_info:
+    cleanup: '[]'
+  privilege: ''
+  plugin: ''
+  technique_name: Ports
+  buckets: []
+  singleton: false
+  tactic: collection
+  technique_id: T1497.003
+  access: {}
+  delete_payload: true
+  executors:
+  - platform: windows
+    command: 'Get-NetTCPConnection -State Listen >$env:PUBLIC\exf\TCP_listening_ports.txt;
+
+      Get-NetUDPEndpoint >$env:PUBLIC\exf\UDP_listening_ports.txt;'
+    additional_info: {}
+    code: null
+    cleanup: []
+    timeout: 60
+    parsers: []
+    variations: []
+    payloads: []
+    language: null
+    build_target: null
+    uploads: []
+    name: psh
+  requirements: []
+  repeatable: false
+  description: Display UDP and TCP open ports
+  name: Open Ports
+  id: Listening_ports_list

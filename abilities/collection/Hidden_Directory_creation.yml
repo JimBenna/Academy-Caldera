@@ -1,0 +1,34 @@
+- additional_info:
+    cleanup: '[]'
+  privilege: ''
+  plugin: ''
+  technique_name: File and Directory Discovery
+  buckets: []
+  singleton: false
+  tactic: collection
+  technique_id: T1497.003
+  access: {}
+  delete_payload: true
+  executors:
+  - platform: windows
+    command: 'New-Item -ItemType directory -Path "$env:PUBLIC\exf";
+
+      $hidden_dir=Get-Item "$env:PUBLIC\exf" -Force;
+
+      $hidden_dir.attributes="Hidden";'
+    additional_info: {}
+    code: null
+    cleanup: []
+    timeout: 60
+    parsers: []
+    variations: []
+    payloads: []
+    language: null
+    build_target: null
+    uploads: []
+    name: psh
+  requirements: []
+  repeatable: false
+  description: cresate a directory and hide it
+  name: Hidden directory creation
+  id: Hidden_Directory_creation

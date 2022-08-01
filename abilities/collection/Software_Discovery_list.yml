@@ -1,0 +1,39 @@
+- additional_info:
+    cleanup: '[]'
+  privilege: ''
+  plugin: ''
+  technique_name: Software Discovery
+  buckets: []
+  singleton: false
+  tactic: collection
+  technique_id: T1059.001
+  access: {}
+  delete_payload: true
+  executors:
+  - platform: windows
+    command: '$Installed = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*
+      | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate;
+
+      $Installed += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*
+      | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate;
+
+      $Installed | ?{ $_.DisplayName -ne $null } | sort-object -Property DisplayName
+      -Unique | Format-Table -AutoSize > $env:PUBLIC\exf\installed_Apps_List.txt;
+
+      Get-Hotfix | Sort InstalledOn | Format-Table -Autosize > $env:PUBLIC\exf\installed_hotfixes_list.txt'
+    additional_info: {}
+    code: null
+    cleanup: []
+    timeout: 60
+    parsers: []
+    variations: []
+    payloads: []
+    language: null
+    build_target: null
+    uploads: []
+    name: psh
+  requirements: []
+  repeatable: false
+  description: List installed softwares and updates
+  name: Softwares and updates
+  id: Software_Discovery_list
