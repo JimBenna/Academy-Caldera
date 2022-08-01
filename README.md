@@ -1,1 +1,1 @@
-# XDR-Academy-Caldera
+Academy-Caldera
