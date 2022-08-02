@@ -8,8 +8,8 @@
   repeatable: false
   tactic: execution
   requirements: []
-  description: Downloads extract latest package of etl2pcapng to convert etl capture
-    to PCAPNG file
+  description: Downloads with certutil latest package of etl2pcapng, uncompress the
+    archive  and convert etl capture to PCAPNG file
   executors:
   - platform: windows
     cleanup: []
@@ -23,20 +23,17 @@
     parsers: []
     code: null
     build_target: null
-    command: "$Etl_capture_file=$env:PUBLIC\\exf\\capture.etl;\n$exf_file=$env:PUBLIC\\\
-      capture.log;\nif ([System.IO.File]::Exists($Etl_capture_file)) {\n\t[System.Net.ServicePointManager]::ServerCertificateValidationCallback=\
-      \ { $True };\n\t$web = (New-Object System.Net.WebClient);\n\t$result = $web.DownloadFile(\"\
-      https://github.com/microsoft/etl2pcapng/releases/latest/download/etl2pcapng.zip\"\
-      ,\"etl2pcapng.zip\");\n      \tNew-Item -ItemType \"directory\" $env:PUBLIC\\\
-      etl2pcapng -Force;\n      \t$psdir=Get-Item \"$env:PUBLIC\\etl2pcapng\" -Force;\n\
-      \      \t$psdir.attributes=\"hidden\";\n\tAdd-Type -Assembly 'System.IO.Compression.FileSystem';\
-      \ \n\t[System.IO.Compression.ZipFile]::ExtractToDirectory(\"$env:PUBLIC\\etl2pcapng\\\
-      etl2pcapng.zip\",\"$env:PUBLIC\\etl2pcapng\");'\n        $env:PUBLIC\\etl2pcapng\\\
-      etl2pcapng\\x86\\etl2etlpcapng.exe $env:PUBLIC\\exf\\capture.etl $env:PUBLIC\\\
-      exf\\capture.pcap;  \n\texit 0;\n} else {\n  echo \"ETL file $Etl_capture_file\
-      \ Failed does not exists.\" >$exf_file;\n  exit 1;\n};"
+    command: "$Etl_capture_file=\"$env:PUBLIC\\exf\\capture.etl\";\n$exf_file=\"$env:PUBLIC\\\
+      exf\\capture.log\";\nif ([System.IO.File]::Exists($Etl_capture_file)) \ntry\
+      \ {\ncertutil -urlcache -f https://github.com/microsoft/etl2pcapng/releases/latest/download/etl2pcapng.zip\
+      \ $env:PUBLIC:\xB7\\etl2pcapng.zip;\nAdd-Type -Assembly 'System.IO.Compression.FileSystem';\
+      \ \n[System.IO.Compression.ZipFile]::ExtractToDirectory(\"$env:PUBLIC\\etl2pcapng.zip\"\
+      ,\"$env:PUBLIC\");'\n$psdir=Get-Item \"$env:PUBLIC\\etl2pcapng\" -Force;\n$psdir.attributes=\"\
+      hidden\";\n$env:PUBLIC\\etll2pcapng\\etl2pcapng\\x86\\etl2etlpcapng.exe $env:PUBLIC\\\
+      exf\\capture.etl $env:PUBLIC\\exf\\capture.pcap;  \n\texit 0;\n} \ncatch {\n\
+      \  throw $_.Exception.Message >$exf_file;\n  exit 1;\n};"
   singleton: false
   buckets: []
-  name: Download extract etl2pcapng to convert packet capture
+  name: Download extract etl2pcapng to convert packet capture with certutil
   access: {}
   id: etl2pcap_download_and_use
