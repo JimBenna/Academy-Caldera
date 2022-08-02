@@ -12,7 +12,8 @@
     archive  and convert etl capture to PCAPNG file
   executors:
   - platform: windows
-    cleanup: []
+    cleanup:
+    - Remove-Item -Path $env:PUBLIC\etl2pcapng -Recurse; Remove-Item -Path $env:PUBLIC\etl2pcapng.zip
     variations: []
     timeout: 60
     additional_info: {}
@@ -23,15 +24,18 @@
     parsers: []
     code: null
     build_target: null
-    command: "$etl_capture_file=\"$env:PUBLIC\\exf\\capture.etl\";\n$exf_file=\"$env:PUBLIC\\\
-      exf\\capture.log\";\nif ([System.IO.File]::Exists($etl_capture_file)) {\ncertutil\
-      \ -urlcache -f https://github.com/microsoft/etl2pcapng/releases/latest/download/etl2pcapng.zip\
-      \ $env:PUBLIC:\\etl2pcapng.zip;\nAdd-Type -Assembly 'System.IO.Compression.FileSystem';\n\
-      [System.IO.Compression.ZipFile]::ExtractToDirectory(\"$env:PUBLIC\\etl2pcapng.zip\"\
+    command: "$etl_capture_file = \"$env:PUBLIC\\exf\\capture.etl\";\n$pcap_file =\
+      \ \"$env:PUBLIC\\exf\\capture.pcap\";\n$etl2pcapng_command = \"$env:PUBLIC\\\
+      etl2pcapng\\x86\\etl2pcapng.exe\";\n$exf_file = \"$env:PUBLIC\\exf\\capture.log\"\
+      ;\n\nif ([System.IO.File]::Exists(\"$etl_capture_file\")) {\ncertutil -urlcache\
+      \ -f https://github.com/microsoft/etl2pcapng/releases/latest/download/etl2pcapng.zip\
+      \ \"$env:PUBLIC\\etl2pcapng.zip\";\nAdd-Type -Assembly 'System.IO.Compression.FileSystem';\
+      \ \n[System.IO.Compression.ZipFile]::ExtractToDirectory(\"$env:PUBLIC\\etl2pcapng.zip\"\
       ,\"$env:PUBLIC\");\n$psdir=Get-Item \"$env:PUBLIC\\etl2pcapng\" -Force;\n$psdir.attributes=\"\
-      hidden\";\n$env:PUBLIC\\etl2pcapng\\x86\\etl2pcapng.exe $env:PUBLIC\\exf\\capture.etl\
-      \ $env:PUBLIC\\exf\\capture.pcap;  \n\texit 0;\n} \nelse {\n Write-Host \"The\
-      \ file [$etl_capture_file] does not exists !!!\" >$exf_file;\n  exit 1;\n};"
+      hidden\";\n$convert=\"$etl2pcapng_command\"+\" \"+\"$etl_capture_file\"+\" \"\
+      +\"$pcap_file\";\nInvoke-Expression $convert;\nexit 0;\n} \nelse {\n Write-Host\
+      \ \"The file [\"$etl_capture_file\"] does not exists !!!\" >$exf_file;\n  exit\
+      \ 1;\n};"
   singleton: false
   buckets: []
   name: Download extract etl2pcapng to convert packet capture with certutil
