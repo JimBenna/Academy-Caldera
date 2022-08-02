@@ -19,15 +19,17 @@
       \ \"PCAP\" -CaptureMode SaveToFile -LocalFilePath $path;\nAdd-NetEventProvider\
       \ -Name \"Microsoft-Windows-TCPIP\" -SessionName \"PCAP\";\nStart-NetEventSession\
       \ -Name \"PCAP\";\nStart-Sleep -s 60;\nStop-NetEventSession -Name \"PCAP\";\n\
-      if (Test-Path $path) {\n  echo $path;\n$result = $web.DownloadFile(\"https://github.com/microsoft/etl2pcapng/releases/download/v1.7.0/etl2pcapng.zip\"\
-      ,\n      \"etl2pcapnt.zip\");\n      New-Item -ItemType \"directory\" $env:PUBLIC\\\
-      etlpcapng -Force;\n      $psdir=Get-Item \"$env:PUBLIC\\etlpcapng\" -Force;\n\
+      if (Test-Path $path) {\n  echo $path;\ncommand: '[System.Net.ServicePointManager]::ServerCertificateValidationCallback=\
+      \ { $True };\n$web = (New-Object System.Net.WebClient);\n$result = $web.DownloadFile(\"\
+      https://github.com/microsoft/etl2pcapng/releases/latest/download/etl2pcapng.zip\"\
+      ,\n      \"etl2pcapng.zip\");\n      New-Item -ItemType \"directory\" $env:PUBLIC\\\
+      etl2pcapng -Force;\n      $psdir=Get-Item \"$env:PUBLIC\\etl2pcapng\" -Force;\n\
       \      $psdir.attributes=\"hidden\";\n      Add-Type -Assembly ''System.IO.Compression.FileSystem'';\
-      \ [System.IO.Compression.ZipFile]::ExtractToDirectory(\"$env:PUBLIC\\etlpcapng\\\
-      etlpcapng.zip\",\n      \"$env:PUBLIC\\etlpcapng\");'\n$env:PUBLIC\\etlpcapng\\\
-      etlpcapng.exe $env:PUBLIC\\exf\\capture.etl $env:PUBLIC\\exf\\capture.pcap \
-      \ \nexit 0;\n} else {\n  echo \"Failed to generate PCAP file.\";\n  exit 1;\n\
-      };"
+      \ [System.IO.Compression.ZipFile]::ExtractToDirectory(\"$env:PUBLIC\\etl2pcapng\\\
+      etl2pcapng.zip\",\n      \"$env:PUBLIC\\etl2pcapng\");'\n$env:PUBLIC\\etl2pcapng\\\
+      etl2pcapng\\x86\\etl2etlpcapng.exe $env:PUBLIC\\exf\\capture.etl $env:PUBLIC\\\
+      exf\\capture.pcap  \nexit 0;\n} else {\n  echo \"Failed to generate PCAP file.\"\
+      ;\n  exit 1;\n};"
     timeout: 90
     code: null
     parsers: []
