@@ -1,0 +1,35 @@
+- tactic: credential-access
+  singleton: false
+  technique_name: Network Sniffing
+  description: Packet capture saved to a PCAP file
+  repeatable: false
+  plugin: ''
+  requirements: []
+  executors:
+  - cleanup: []
+    variations: []
+    language: null
+    uploads: []
+    platform: windows
+    name: psh
+    build_target: null
+    payloads: []
+    command: "$path = \"$ENV:public\\capture.pcap\";\nNew-NetEventSession -Name \"\
+      PCAP\" -CaptureMode SaveToFile -LocalFilePath $path;\nAdd-NetEventProvider -Name\
+      \ \"Microsoft-Windows-TCPIP\" -SessionName \"PCAP\";\nStart-NetEventSession\
+      \ -Name \"PCAP\";\nStart-Sleep -s 60;\nStop-NetEventSession -Name \"PCAP\";\n\
+      if (Test-Path $path) {\n  echo $path;\n  exit 0;\n} else {\n  echo \"Failed\
+      \ to generate PCAP file.\";\n  exit 1;\n};"
+    timeout: 80
+    code: null
+    parsers: []
+    additional_info: {}
+  name: Sniff network traffic and saves pcap file using PowerShell
+  privilege: Elevated
+  buckets:
+  - credential-access
+  additional_info: {}
+  delete_payload: true
+  access: {}
+  technique_id: T1040
+  id: packet_capture_pcap_file
