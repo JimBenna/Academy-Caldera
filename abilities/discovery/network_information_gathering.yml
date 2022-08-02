@@ -1,0 +1,38 @@
+- tactic: discovery
+  delete_payload: true
+  singleton: false
+  access: {}
+  additional_info: {}
+  requirements: []
+  technique_name: System Network Configuration Discovery
+  description: 'Network configuration information gathering
+
+
+    Upon successful execution, cmd.exe will spawn multiple commands to list network
+    configuration settings. Output will be stored to a file.
+
+    '
+  buckets:
+  - discovery
+  plugin: ''
+  technique_id: T1016
+  name: Network Configuration Discovery on Windows
+  executors:
+  - timeout: 10
+    payloads: []
+    variations: []
+    additional_info: {}
+    cleanup: []
+    command: set output_file=%PUBLIC%\exf\network_info.txt && ipconfig /all >"%output_file%"
+      && netsh interface show interface >>"%output_file%" && arp -a >>"%output_file%"
+      && nbtstat -n >>"%$output_file%" && net config >>"%output_file%"
+    platform: windows
+    code: null
+    name: cmd
+    uploads: []
+    parsers: []
+    language: null
+    build_target: null
+  repeatable: false
+  privilege: ''
+  id: network_information_gathering
