@@ -1,21 +1,33 @@
-- name: Create a note on user's desktop
-  description: Create a txt file on user's desktop with encoded command
+- technique_id: T1204.002
+  repeatable: false
+  singleton: false
+  access: {}
+  delete_payload: true
+  privilege: ''
+  requirements: []
   tactic: execution
-  technique_id: T1204.002
   technique_name: Malicious file
+  buckets: []
+  plugin: ''
+  name: Create a text on user's desktop with encoded command
+  additional_info:
+    cleanup: '[]'
+  description: Create a text file on user's desktop with a base64 encoded command
+    encoded command
   executors:
   - payloads: []
-    platform: windows
-    name: psh
+    variations: []
     cleanup: []
     parsers: []
-    command: 'powershell.exe -EncodedCommand UwBlAHQALQBDAG8AbgB0AGUAbgB0ACAALQBQAGEAdABoACAAJwBDADoAXABVAHMAZQByAHMAXABCAGUAbgBqAGEAbQBpAG4ATQBlAHIAYwB1AHMAbwB0AFwARABlAHMAawB0AG8AcABcAEwAaQBzAGUAegBfAG0AbwBpAC4AdAB4AHQAJwAgAC0AVgBhAGwAdQBlACAAJwBFAG4AdgBvAHkAZQB6ACAAZABlAHMAIABzAG8AdQBzAC4AIABPAHUAYQBpAHMAIABwAGwAZQBpAG4AIABtAOoAbQBlACAAOgAtACkAJwA7AA=='
-  repeatable: false
-  additional_info: {}
-  privilege: ''
-  singleton: false
-  buckets: []
-  requirements: []
-  access: {}
-  cleanup: []
+    build_target: null
+    name: psh
+    timeout: '10'
+    platform: windows
+    additional_info: {}
+    language: null
+    command: 'powershell.exe -EncodedCommand UwBlAHQALQBDAG8AbgB0AGUAbgB0ACAALQBQAGEAdABoACAAQwA6AFwAVQBzAGUAcgBzAFwAQgBlAG4AagBhAG0AaQBuAE0AZQByAGMAdQBzAG8AdABcAEQAZQBzAGsAdABvAHAAXABMAGkAcwBlAHoAXwBtAG8AaQAuAHQAeAB0ACAALQBWAGEAbAB1AGUAIAAnAEUAbgB2AG8AeQBlAHoAIABkAGUAcwAgAHMAbwB1AHMALgAgAE8AdQBhAGkAcwAgAHAAbABlAGkAbgAgAG0A6gBtAGUAIAA6AC0AKQAnADsA
+
+      '
+    code: null
+    uploads: []
   id: note_on_user_desktop
