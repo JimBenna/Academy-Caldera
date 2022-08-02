@@ -1,0 +1,21 @@
+- name: List user's process and DLL
+  description: List all user's process and linked DLL and store the output in a file
+  tactic: discovery
+  technique_id: T1057
+  technique_name: Process Discovery
+  executors:
+  - payloads: []
+    platform: windows
+    name: psh
+    cleanup: []
+    parsers: []
+    command: '& tasklist /m  >> $env:PUBLIC\exf\Process_list.xt;'
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: true
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  id: process_list_output_to_file
