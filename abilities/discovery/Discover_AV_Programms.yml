@@ -1,37 +1,32 @@
-- additional_info: {}
-  privilege: ''
-  plugin: stockpile
-  technique_name: 'Software Discovery: Security Software Discovery'
-  buckets:
-  - discovery
-  singleton: false
-  tactic: discovery
-  technique_id: T1518.001
-  access: {}
-  delete_payload: true
+- technique_id: T1518.001
   executors:
-  - platform: windows
-    command: wmic /NAMESPACE:\\root\SecurityCenter2 PATH AntiVirusProduct GET /value
-      >$env:PUBLIC\exf\av_product.txt
-    additional_info: {}
+  - cleanup: []
+    command: '$output_file="$env:PROFILE\exf\Av_products_list.txt"
+
+      wmic /NAMESPACE:\\root\SecurityCenter2 PATH AntiVirusProduct GET /value >$output_file'
     code: null
-    cleanup: []
-    timeout: 60
-    parsers:
-    - parserconfigs:
-      - source: host.installed.av
-        target: ''
-        edge: ''
-        custom_parser_vals: {}
-      module: plugins.stockpile.app.parsers.basic
+    build_target: null
+    timeout: '10'
+    platform: windows
     variations: []
     payloads: []
     language: null
-    build_target: null
-    uploads: []
+    additional_info: {}
     name: psh
-  requirements: []
+    uploads: []
+    parsers: []
+  delete_payload: true
+  privilege: ''
+  tactic: discovery
+  access: {}
+  plugin: ''
   repeatable: false
-  description: Identify AV
+  buckets:
+  - discovery
+  additional_info: {}
+  requirements: []
   name: Discover antivirus programs
+  technique_name: 'Software Discovery: Security Software Discovery'
+  singleton: false
+  description: Identify AntiVirus protections and dump that to a file
   id: Discover_AV_Programms

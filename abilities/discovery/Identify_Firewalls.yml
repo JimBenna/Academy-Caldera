@@ -1,37 +1,40 @@
-- additional_info: {}
-  privilege: ''
-  plugin: stockpile
-  technique_name: 'Software Discovery: Security Software Discovery'
-  buckets:
-  - discovery
-  singleton: false
-  tactic: discovery
-  technique_id: T1518.001
-  access: {}
-  delete_payload: true
+- technique_id: T1518.001
   executors:
-  - platform: windows
-    command: '$NameSpace = Get-WmiObject -Namespace "root" -Class "__Namespace" |
-      Select Name | Out-String -Stream | Select-String "SecurityCenter";
+  - cleanup: []
+    command: '$output_file=$env:PUBLIC\firewall_identification.txt
+
+      $NameSpace = Get-WmiObject -Namespace "root" -Class "__Namespace" | Select Name
+      | Out-String -Stream | Select-String "SecurityCenter";
 
       $SecurityCenter = $NameSpace | Select-Object -First 1;
 
       Get-WmiObject -Namespace "root\$SecurityCenter" -Class AntiVirusProduct | Select
       DisplayName, InstanceGuid, PathToSignedProductExe, PathToSignedReportingExe,
-      ProductState, Timestamp | Format-List >$env:PUBLIC\exf\Firewall_Info.txt;'
-    additional_info: {}
+      ProductState, Timestamp | Format-List >$output_file'
     code: null
-    cleanup: []
+    build_target: null
     timeout: 60
-    parsers: []
+    platform: windows
     variations: []
     payloads: []
     language: null
-    build_target: null
-    uploads: []
+    additional_info: {}
     name: psh
-  requirements: []
+    uploads: []
+    parsers: []
+  delete_payload: true
+  privilege: ''
+  tactic: discovery
+  access: {}
+  plugin: ''
   repeatable: false
-  description: Identify Firewalls
-  name: Identify Firewalls
+  buckets:
+  - discovery
+  additional_info: {}
+  requirements: []
+  name: Identify Firewalls and save list to a file
+  technique_name: 'Software Discovery: Security Software Discovery'
+  singleton: false
+  description: This identifies the firewalls installed on windows and save the information
+    to a file
   id: Identify_Firewalls
