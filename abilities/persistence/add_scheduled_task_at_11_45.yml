@@ -1,0 +1,22 @@
+- name: create scheduled task
+  description: create a scheduled task that launches the 'cmd' command at 11:45
+  tactic: persistence
+  technique_id: T1053.005
+  technique_name: 'Scheduled Task/Job: Scheduled Task'
+  executors:
+  - payloads: []
+    platform: windows
+    name: cmd
+    cleanup: []
+    parsers: []
+    command: SCHTASKS /Create /SC ONCE /TN spawn /TR  C:\windows\system32\cmd.exe
+      /ST 11:45
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: false
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  id: add_scheduled_task_at_11_45
