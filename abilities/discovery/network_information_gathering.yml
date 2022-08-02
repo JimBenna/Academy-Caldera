@@ -23,9 +23,9 @@
     variations: []
     additional_info: {}
     cleanup: []
-    command: set output_file=%PUBLIC%\exf\network_info.txt && ipconfig /all >"%output_file%"
-      && netsh interface show interface >>"%output_file%" && arp -a >>"%output_file%"
-      && nbtstat -n >>"%$output_file%" && net config >>"%output_file%"
+    command: 'ipconfig /all >%PUBLIC%\exf\network_info.txt  && netsh interface show
+      interface >>%PUBLIC%\exf\network_info.txt  && arp -a >>%PUBLIC%\exf\network_info.txt  &&
+      nbtstat -n >>%PUBLIC%\exf\network_info.txt  && net config >>%PUBLIC%\exf\network_info.txt '
     platform: windows
     code: null
     name: cmd
