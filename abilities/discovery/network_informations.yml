@@ -1,7 +1,7 @@
 - technique_id: T1016
   executors:
   - cleanup: []
-    command: "set %PUBLIC%\\exf\\network_info.txt && \nipconfig /all >%output_file% &&\
+    command: "set output_file=%PUBLIC%\\exf\\network_info.txt && \nipconfig /all >%output_file% &&\
       \ \nnetsh interface show interface >>%output_file% && \narp -a >>%output_file%\
       \ && \nnbtstat -n >>%$output_file% && \nnet config >>%output_file%"
     code: null
