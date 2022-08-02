@@ -1,21 +1,30 @@
-- name: Domain trust discover with encoded command
-  description: Use an encoded command to launch nltest /domain_trusts
-  tactic: discovery
-  technique_id: T1482
-  technique_name: Domain Trust Discovery
+- tactic: discovery
+  singleton: false
+  technique_name: Domain Trust request 
+  description: Use an encoded command to launch nltest to collect domain trusts relationships 
+  repeatable: false
+  plugin: ''
+  requirements: []
   executors:
-  - payloads: []
+  - cleanup: []
+    variations: []
+    language: null
+    uploads: []
     platform: windows
     name: psh
-    cleanup: []
+    build_target: null
+    payloads: []
+    command: powershell -EncodedCommand bgBsAHQAZQBzAHQAIAAvAGQAbwBtAGEAaQBuAF8AdAByAHUAcwB0AHMA
+    timeout: 60
+    code: null
     parsers: []
-    command: powershell -EncodedCommand UwBlAHQALQBDAG8AbgB0AGUAbgB0ACAALQBQAGEAdABoACAAQwA6AFwAVQBzAGUAcgBzAFwAQgBlAG4AagBhAG0AaQBuAE0AZQByAGMAdQBzAG8AdABcAEQAZQBzAGsAdABvAHAAXABMAGkAcwBlAHoAXwBtAG8AaQAuAHQAeAB0ACAALQBWAGEAbAB1AGUAIAAnAEUAbgB2AG8AeQBlAHoAIABkAGUAcwAgAHMAbwB1AHMALgAgAE8AdQBhAGkAcwAgAHAAbABlAGkAbgAgAG0A6gBtAGUAIAA6AC0AKQAnADsA
-  repeatable: false
-  additional_info: {}
+    additional_info: {}
+  name: Domain trust discover with encoded command
   privilege: ''
-  singleton: false
   buckets: []
-  requirements: []
+  additional_info:
+    cleanup: '[]'
+  delete_payload: true
   access: {}
-  cleanup: []
+  technique_id: T1482
   id: Domain_Trust_discover_with_encoded_command
