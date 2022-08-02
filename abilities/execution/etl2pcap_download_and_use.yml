@@ -29,7 +29,7 @@
       \ $env:PUBLIC:\xB7\\etl2pcapng.zip;\nAdd-Type -Assembly 'System.IO.Compression.FileSystem';\
       \ \n[System.IO.Compression.ZipFile]::ExtractToDirectory(\"$env:PUBLIC\\etl2pcapng.zip\"\
       ,\"$env:PUBLIC\");\n$psdir=Get-Item \"$env:PUBLIC\\etl2pcapng\" -Force;\n$psdir.attributes=\"\
-      hidden\";\n$env:PUBLIC\\etll2pcapng\\etl2pcapng\\x86\\etl2etlpcapng.exe $env:PUBLIC\\\
+      hidden\";\n$env:PUBLIC\\etl2pcapng\\etl2pcapng\\x86\\etl2etlpcapng.exe $env:PUBLIC\\\
       exf\\capture.etl $env:PUBLIC\\exf\\capture.pcap;  \n\texit 0;\n} \nelse {\n\
       \ Write-Host \"The file [$etl_capture_file] does not exists !!!\" >$exf_file;\n\
       \  exit 1;\n};"
