@@ -1,33 +1,33 @@
 - technique_id: T1204.002
-  repeatable: false
-  singleton: false
-  access: {}
-  delete_payload: true
-  privilege: ''
-  requirements: []
-  tactic: execution
-  technique_name: Malicious file
-  buckets: []
-  plugin: ''
-  name: Create a text on user's desktop with encoded command
-  additional_info:
-    cleanup: '[]'
-  description: Create a text file on user's desktop with a base64 encoded command
-    encoded command
   executors:
-  - payloads: []
-    variations: []
-    cleanup: []
-    parsers: []
-    build_target: null
-    name: psh
-    timeout: '10'
-    platform: windows
-    additional_info: {}
-    language: null
-    command: 'powershell.exe -EncodedCommand UwBlAHQALQBDAG8AbgB0AGUAbgB0ACAALQBQAGEAdABoACAAQwA6AFwAVQBzAGUAcgBzAFwAQgBlAG4AagBhAG0AaQBuAE0AZQByAGMAdQBzAG8AdABcAEQAZQBzAGsAdABvAHAAXABMAGkAcwBlAHoAXwBtAG8AaQAuAHQAeAB0ACAALQBWAGEAbAB1AGUAIAAnAEUAbgB2AG8AeQBlAHoAIABkAGUAcwAgAHMAbwB1AHMALgAgAE8AdQBhAGkAcwAgAHAAbABlAGkAbgAgAG0A6gBtAGUAIAA6AC0AKQAnADsA
+  - cleanup: []
+    command: 'Set-Content -Path $env:USERPROFILE\Desktop\Read_Me.txt -Value "Send
+      me money, yeah plenty of cash, FAST";
 
       '
     code: null
+    build_target: null
+    timeout: 10
+    platform: windows
+    variations: []
+    payloads: []
+    language: null
+    additional_info: {}
+    name: psh
     uploads: []
+    parsers: []
+  delete_payload: true
+  privilege: ''
+  tactic: execution
+  access: {}
+  plugin: ''
+  repeatable: false
+  buckets: []
+  additional_info:
+    cleanup: '[]'
+  requirements: []
+  name: 'Text on user''s desktop '
+  technique_name: Malicious file
+  singleton: false
+  description: Create a text file on user's desktop
   id: note_on_user_desktop
