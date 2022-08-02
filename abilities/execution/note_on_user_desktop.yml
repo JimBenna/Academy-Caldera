@@ -1,0 +1,25 @@
+- name: Create a note on user's desktop
+  description: Create a txt file on user's desktop with encoded command
+  tactic: execution
+  technique_id: T1204.002
+  technique_name: Malicious file
+  executors:
+  - payloads: []
+    platform: windows
+    name: donut_amd64
+    cleanup: []
+    parsers: []
+    command: 'powershell.exe -EncodedCommand UwBlAHQALQBDAG8AbgB0AGUAbgB0ACAALQBQAGEAdABoACAAJwBDADoAXABVAHMAZQByAHMAXABCAGUAbgBqAGEAbQBpAG4ATQBlAHIAYw
+
+      B1AHMAbwB0AFwARABlAHMAawB0AG8AcABcAEwAaQBzAGUAegBfAG0AbwBpAC4AdAB4AHQAJwAgAC0AVgBhAGwAdQBlACAAJwBFAG4AdgBv
+
+      AHkAZQB6ACAAZABlAHMAIABzAG8AdQBzAC4AIABPAHUAYQBpAHMAIABwAGwAZQBpAG4AIABtAOoAbQBlACAAOgAtACkAJwA7AA=='
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: false
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  id: note_on_user_desktop
