@@ -1,0 +1,38 @@
+- technique_id: T1016
+  executors:
+  - cleanup: []
+    command: "set %PUBLIC%\\exf\\network_info.txt\nipconfig /all >%output_file% &&\
+      \ \nnetsh interface show interface >>%output_file% && \narp -a >>%output_file%\
+      \ && \nnbtstat -n >>%$output_file% && \nnet config >>%output_file%"
+    code: null
+    build_target: null
+    timeout: '10'
+    platform: windows
+    variations: []
+    payloads: []
+    language: null
+    additional_info: {}
+    name: cmd
+    uploads: []
+    parsers: []
+  delete_payload: true
+  privilege: ''
+  tactic: discovery
+  access: {}
+  plugin: atomic
+  repeatable: false
+  buckets:
+  - discovery
+  additional_info: {}
+  requirements: []
+  name: System Network Configuration Discovery on Windows
+  technique_name: System Network Configuration Discovery
+  singleton: false
+  description: 'Network configuration information gathering
+
+
+    Upon successful execution, cmd.exe will spawn multiple commands to list network
+    configuration settings. Output will be stored to a file.
+
+    '
+  id: network_information_gathering
