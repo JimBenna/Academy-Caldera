@@ -1,0 +1,21 @@
+- name: Domain trust discover with encoded command
+  description: Use an encoded command to launch nltest /domain_trusts
+  tactic: discovery
+  technique_id: T1482
+  technique_name: Domain Trust Discovery
+  executors:
+  - payloads: []
+    platform: windows
+    name: psh
+    cleanup: []
+    parsers: []
+    command: powershell -EncodedCommand UwBlAHQALQBDAG8AbgB0AGUAbgB0ACAALQBQAGEAdABoACAAQwA6AFwAVQBzAGUAcgBzAFwAQgBlAG4AagBhAG0AaQBuAE0AZQByAGMAdQBzAG8AdABcAEQAZQBzAGsAdABvAHAAXABMAGkAcwBlAHoAXwBtAG8AaQAuAHQAeAB0ACAALQBWAGEAbAB1AGUAIAAnAEUAbgB2AG8AeQBlAHoAIABkAGUAcwAgAHMAbwB1AHMALgAgAE8AdQBhAGkAcwAgAHAAbABlAGkAbgAgAG0A6gBtAGUAIAA6AC0AKQAnADsA
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: false
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  id: Domain_Trust_discover_with_encoded_command
