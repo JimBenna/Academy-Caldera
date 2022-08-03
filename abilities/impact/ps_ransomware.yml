@@ -1,0 +1,33 @@
+- technique_id: T1486
+  executors:
+  - cleanup: []
+    command: 'Set-Content -Path $env:USERPROFILE\Desktop\Read_Me.txt -Value "Send
+      me money, yeah plenty of cash, FAST";
+
+      '
+    code: null
+    build_target: null
+    timeout: 10
+    platform: windows
+    variations: []
+    payloads: []
+    language: null
+    additional_info: {}
+    name: psh
+    uploads: []
+    parsers: []
+  delete_payload: true
+  privilege: ''
+  tactic: execution
+  access: {}
+  plugin: ''
+  repeatable: false
+  buckets: []
+  additional_info:
+    cleanup: '[]'
+  requirements: []
+  name: 'PS Ransomware'
+  technique_name: Malicious file
+  singleton: false
+  description: Will encode files in fake_document
+  id: ps_ransomware
