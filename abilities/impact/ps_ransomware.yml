@@ -31,7 +31,7 @@
     cleanup: '[]'
   requirements: []
   name: 'PS Ransomware'
-  technique_name: Malicious file
+  technique_name: Data Encrypted for Impact
   singleton: false
   description: Will encode files in fake_documents
   id: ps_ransomware
