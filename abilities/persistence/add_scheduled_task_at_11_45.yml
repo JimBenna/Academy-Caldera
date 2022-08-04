@@ -9,8 +9,7 @@
     name: cmd
     cleanup: []
     parsers: []
-    command: SCHTASKS /Create /SC ONCE /TN spawn /TR  C:\windows\system32\cmd.exe
-      /ST 11:45
+    command: SCHTASKS /Create /SC ONCE /TN Launch CMD /TR  C:\windows\system32\cmd.exe /ST 11:45
   repeatable: false
   additional_info: {}
   privilege: ''
