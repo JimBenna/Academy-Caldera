@@ -12,9 +12,7 @@
   executors:
   - platform: windows
     command: 'New-Item -ItemType directory -Path "$env:PUBLIC\exf";
-
       $hidden_dir=Get-Item "$env:PUBLIC\exf" -Force;
-
       $hidden_dir.attributes="Hidden";'
     additional_info: {}
     code: null
