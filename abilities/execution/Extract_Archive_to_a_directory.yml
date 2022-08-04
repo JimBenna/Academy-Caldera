@@ -1,0 +1,27 @@
+- name: Extract archive file to a directory
+  description: This ability extracts an archive to a mentionned directory. The file
+    MUST have been compressed using a ZIP tools that WINDOWS is able to extract natively
+  tactic: execution
+  technique_id: T1059.001
+  technique_name: PowerShell
+  executors:
+  - payloads: []
+    platform: windows
+    name: psh
+    cleanup: []
+    parsers: []
+    command: "$ArchiveFile = \"$env:USERPROFILE\\Documents\\fake_Documents.zip\";\n\
+      $DestinationDirectory = \"$env:USERPROFILE\\Documents\";\n$LogFile = \"$env:PUBLIC\\\
+      exf\\extract_zip.log\";\n\nif ([System.IO.File]::Exists(\"$ArchiveFile\")) {\n\
+      Add-Type -Assembly 'System.IO.Compression.FileSystem';[System.IO.Compression.ZipFile]::ExtractToDirectory(\"\
+      $ArchiveFile\",\"$DestinationDirectory\");\nexit 0;\n} \nelse { Write-Host \"\
+      The file [\"$ArchiveFile\"] does not exists !!!\" >$LogFile;\nexit 1;\n };"
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: true
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  id: Extract_Archive_to_a_directory
