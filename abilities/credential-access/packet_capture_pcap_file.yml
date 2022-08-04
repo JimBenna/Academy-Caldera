@@ -15,9 +15,9 @@
     build_target: null
     payloads: []
     command: '$Destination_file="$env:PUBLIC\exf\capture.etl";
-    netsh trace start capture=yes tracefile=$Destination_file;
+    Invoke-Expression "netsh trace start capture=yes tracefile=$Destination_file";
     Start-Sleep -s 60;
-    netsh trace stop;'
+    Invoke-Expression "netsh trace stop";'
     timeout: '70'
     code: null
     parsers: []
