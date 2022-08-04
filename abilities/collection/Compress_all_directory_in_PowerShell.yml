@@ -9,8 +9,8 @@
     name: psh
     cleanup: []
     parsers: []
-    command: '$source_dir="$env:PUBLIC\exf";
-    $destination_dir="$env:PATH\";
+    command: '$source_dir="$env:PUBLIC\exf\";
+    $destination_dir="$env:PUBLIC\";
     $archive_name="data.zip";
     $full_name=$source_dir+$archive_name;
     Compress-archive -Path $source_dir -DestinationPath $full_name -CompressionLevel Optimal;
