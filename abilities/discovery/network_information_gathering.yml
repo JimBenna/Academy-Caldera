@@ -23,9 +23,7 @@
     variations: []
     additional_info: {}
     cleanup: []
-    command: 'ipconfig /all >%PUBLIC%\exf\network_info.txt  && netsh interface show
-      interface >>%PUBLIC%\exf\network_info.txt  && arp -a >>%PUBLIC%\exf\network_info.txt  &&
-      nbtstat -n >>%PUBLIC%\exf\network_info.txt  && net config >>%PUBLIC%\exf\network_info.txt '
+    command: 'ipconfig /all >%PUBLIC%\exf\network_info.txt && netsh interface show interface >>%PUBLIC%\exf\network_info.txt && arp -a >>%PUBLIC%\exf\network_info.txt && nbtstat -n >>%PUBLIC%\exf\network_info.txt && net config >>%PUBLIC%\exf\network_info.txt'
     platform: windows
     code: null
     name: cmd
