@@ -7,10 +7,18 @@
   executors:
   - payloads: []
     platform: windows
-    name: cmd
+    name: psh
     cleanup: []
     parsers: []
-    command: 'set DestinationDirectory=%USERPROFILE%\Documents && set DownloadURL=https://github.com/JimBenna/fakedocs/raw/main/fake_Documents.zip && %windir%\system32\curl.exe -LJO %DownloadURL% -o %DestinationDirectory%'
+    command: '$DestinationFile = "$env:USERPROFILE\Documents\fake_Documents.zip"
+$DownloadURL="https://github.com/JimBenna/fakedocs/raw/main/fake_Documents.zip"
+$CompleteCommand= "curl"+" $DownloadURL"+" -outfile "+"$DestinationFile";
+Write-Output $CurlCommand
+# echo $DestinationDirectory
+# echo $DownloadURL
+# echo $CompleteCommand
+Invoke-Expression  $CompleteCommand
+    '
     timeout: '60'
   repeatable: false
   additional_info: {}
