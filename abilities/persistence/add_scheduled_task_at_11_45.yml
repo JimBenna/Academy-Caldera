@@ -1,5 +1,5 @@
 - name: create scheduled task
-  description: create a scheduled task that launches the 'cmd' command at 11:45
+  description: create a scheduled task that launches each day the 'cmd' command at 11:45
   tactic: persistence
   technique_id: T1053.005
   technique_name: 'Scheduled Task/Job: Scheduled Task'
@@ -9,7 +9,7 @@
     name: cmd
     cleanup: []
     parsers: []
-    command: SCHTASKS /Create /SC ONCE /TN Launch CMD /TR  C:\windows\system32\cmd.exe /ST 11:45
+    command: SCHTASKS /Create /SC DAILY /TN Launch CMD /TR  C:\windows\system32\cmd.exe /ST 11:45
   repeatable: false
   additional_info: {}
   privilege: ''
