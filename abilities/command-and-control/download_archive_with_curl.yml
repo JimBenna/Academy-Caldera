@@ -10,15 +10,14 @@
     name: psh
     cleanup: []
     parsers: []
-    command: '$DestinationFile = "$env:USERPROFILE\Documents\fake_Documents.zip"
-$DownloadURL="https://github.com/JimBenna/fakedocs/raw/main/fake_Documents.zip"
+    command: '$DestinationFile = "$env:USERPROFILE\Documents\fake_Documents.zip";
+$DownloadURL="https://github.com/JimBenna/fakedocs/raw/main/fake_Documents.zip";
 $CompleteCommand= "curl"+" $DownloadURL"+" -outfile "+"$DestinationFile";
-Write-Output $CurlCommand
-# echo $DestinationDirectory
-# echo $DownloadURL
-# echo $CompleteCommand
-Invoke-Expression  $CompleteCommand
-    '
+# Write-Output $CurlCommand;
+# echo $DestinationDirectory;
+# echo $DownloadURL;
+# echo $CompleteCommand;
+Invoke-Expression  $CompleteCommand;'
     timeout: '60'
   repeatable: false
   additional_info: {}
