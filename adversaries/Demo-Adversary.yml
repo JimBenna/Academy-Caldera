@@ -1,0 +1,29 @@
+adversary_id: Demo-Adversary
+name: Demo-Adversary
+description: Adversary pour l'academy
+atomic_ordering:
+- Hidden_Directory_creation
+- download_archive_with_curl
+- Extract_Archive_to_a_directory
+- Discover_AV_Programms
+- Identify_Firewalls
+- Identify_local_users
+- process_list_output_to_file
+- network_information_gathering
+- Listening_ports_list
+- systeminfo_details_collection
+- Software_Discovery_list
+- Discover_Domain_Controllers
+- Public_Ip_Addresses_Collection
+- Domain_Trust_discover_with_encoded_command
+- view_samba_shares
+- Donwload_and_install_pstools
+- packet_capture_pcap_file
+- etl2pcap_download_and_use
+- donwload_and_run_mimikatz
+- Compress_all_directory_in_PowerShell
+- ftp_archive_exfiltration
+- add_scheduled_task_at_11_45
+- ps_ransomware
+- note_on_user_desktop
+objective: Demo-Adversary
