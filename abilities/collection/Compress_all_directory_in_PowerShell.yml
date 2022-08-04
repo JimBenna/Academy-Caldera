@@ -10,17 +10,11 @@
     cleanup: []
     parsers: []
     command: '$source_dir="$env:PATH\exf";
-
-      $destination_dir="$env:PATH\";
-
-      $archive_name="data.zip";
-
-      $full_name=$source_dir+$archive_name;
-
-      Compress-archive -Path $source_dir -DestinationPath $full_name -CompressionLevel
-      Optimal;
-
-      '
+    $destination_dir="$env:PATH\";
+    $archive_name="data.zip";
+    $full_name=$source_dir+$archive_name;
+    Compress-archive -Path $source_dir -DestinationPath $full_name -CompressionLevel Optimal;
+    '
     timeout: '10'
   repeatable: false
   additional_info: {}
