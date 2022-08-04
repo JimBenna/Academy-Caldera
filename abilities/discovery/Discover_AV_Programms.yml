@@ -1,9 +1,8 @@
 - technique_id: T1518.001
   executors:
   - cleanup: []
-    command: '$output_file="$env:PROFILE\exf\Av_products_list.txt"
-
-      wmic /NAMESPACE:\\root\SecurityCenter2 PATH AntiVirusProduct GET /value >$output_file'
+    command: '$output_file="$env:PROFILE\exf\Av_products_list.txt";
+    wmic /NAMESPACE:\\root\SecurityCenter2 PATH AntiVirusProduct GET /value >$output_file'
     code: null
     build_target: null
     timeout: '10'
