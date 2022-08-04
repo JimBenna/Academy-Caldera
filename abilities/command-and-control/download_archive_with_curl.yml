@@ -12,7 +12,7 @@
     parsers: []
     command: 'set DestinationDirectory=%USERPROFILE%\Documents &&
 
-      set DownloadURL="https://github.com/JimBenna/Academy-Caldera/raw/main/fake_documents/fake_Documents.zip"
+      set DownloadURL="https://github.com/JimBenna/fakedocs/raw/main/fake_documents/fake_Documents.zip"
       &&
 
       %windir%\system32\curl.exe -LJO %DownloadURL% -o %DestinationDirectory%'
