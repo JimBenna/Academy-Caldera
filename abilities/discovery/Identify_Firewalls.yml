@@ -1,16 +1,10 @@
 - technique_id: T1518.001
   executors:
   - cleanup: []
-    command: '$output_file=$env:PUBLIC\firewall_identification.txt
-
-      $NameSpace = Get-WmiObject -Namespace "root" -Class "__Namespace" | Select Name
-      | Out-String -Stream | Select-String "SecurityCenter";
-
+    command: '$output_file="$env:PUBLIC\firewall_identification.txt";
+      $NameSpace = Get-WmiObject -Namespace "root" -Class "__Namespace" | Select Name | Out-String -Stream | Select-String "SecurityCenter";
       $SecurityCenter = $NameSpace | Select-Object -First 1;
-
-      Get-WmiObject -Namespace "root\$SecurityCenter" -Class AntiVirusProduct | Select
-      DisplayName, InstanceGuid, PathToSignedProductExe, PathToSignedReportingExe,
-      ProductState, Timestamp | Format-List >$output_file'
+      Get-WmiObject -Namespace "root\$SecurityCenter" -Class AntiVirusProduct | Select DisplayName, InstanceGuid, PathToSignedProductExe, PathToSignedReportingExe, ProductState, Timestamp | Format-List >$output_file;'
     code: null
     build_target: null
     timeout: 60
