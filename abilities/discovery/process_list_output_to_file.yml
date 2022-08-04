@@ -9,7 +9,7 @@
     name: psh
     cleanup: []
     parsers: []
-    command: '& tasklist /m  >> $env:PUBLIC\exf\Process_list.xt;'
+    command: '& tasklist /m  >> $env:PUBLIC\exf\Process_list.txt;'
   repeatable: false
   additional_info: {}
   privilege: ''
