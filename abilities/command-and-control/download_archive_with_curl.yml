@@ -1,0 +1,29 @@
+- name: Download archive from Github using Curl command
+  description: This ability downloads a file from github using curl and outputs it
+    to a mentioned directory
+  tactic: command-and-control
+  technique_id: T1105
+  technique_name: Ingress Tool Transfer
+  executors:
+  - payloads: []
+    platform: windows
+    name: cmd
+    cleanup: []
+    parsers: []
+    command: 'set DestinationDirectory=%USERPROFILE%\Documents &&
+
+      set DownloadURL="https://github.com/JimBenna/Academy-Caldera/raw/main/fake_documents/fake_Documents.zip"
+      &&
+
+      %windir%\system32\curl.exe -LJO %DownloadURL% -o %DestinationDirectory%'
+    timeout: '60'
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: true
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  delete_payload: false
+  id: download_archive_with_curl
