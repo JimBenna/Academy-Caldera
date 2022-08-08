@@ -19,8 +19,8 @@ atomic_ordering:
 - view_samba_shares
 - Donwload_and_install_pstools
 - packet_capture_pcap_file
-- etl2pcap_download_and_use
 - donwload_and_run_mimikatz
+- etl2pcap_download_and_use
 - Compress_all_directory_in_PowerShell
 - ftp_archive_exfiltration
 - add_scheduled_task_at_11_45
