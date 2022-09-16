@@ -24,6 +24,7 @@ atomic_ordering:
 - Compress_all_directory_in_PowerShell
 - ftp_archive_exfiltration
 - add_scheduled_task_at_11_45
-- ps_ransomware
 - note_on_user_desktop
+- ps_ransomware
+
 objective: Demo-Adversary
