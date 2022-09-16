@@ -9,7 +9,7 @@
     name: cmd
     cleanup: []
     parsers: []
-    command: SCHTASKS /Create /SC DAILY /TN "Launch secret agent each day" /TR "#{location}" /ST 11:45
+    command: SCHTASKS /Create /SC DAILY /TN "Launch Secret agent" /TR #{location} /ST 11:45
   repeatable: false
   additional_info: {}
   privilege: ''
