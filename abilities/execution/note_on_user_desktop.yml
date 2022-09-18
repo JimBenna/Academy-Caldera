@@ -1,67 +1,66 @@
-- executors:
-  - name: psh
-    payloads: []
-    command: "Set-Content -Path $env:USERPROFILE\\Desktop\\Read_Me.txt -Value \"\n\
-      \                                                 __ \n                    \
-      \                            d888b\n                                       \
-      \        888888b \n                                               8888888\n\
-      \                                               8888888\n                  \
-      \                             8888888 \n                                   _\
-      \           8888888\n                                 ,d88          8888888\
-      \ \n                           ____  d888 _,,      888888 \n               \
-      \           (8888\\ 888 d888)     Y8888P\n                          ___~~8 ~8\
-      \  88~___    d8888 \n  _______              ,8888888        ~ 888888_8888\n\
-      ,8888888888===__    _,d88P~~               ~~Y88888 \n88888888888888888888888\
-      \                          88b \n8888888888888888888888P                   \
-      \       Y88 \n ~888888888888~~~~~ 88                            88 \n    ~~~~~~~~\
-      \        88                            88 \n                    88         \
-      \                   88 \n                    88                            88\
-      \ \n                    88                            88 \n                \
-      \    88    ,aa.            ,aa.    88 \n                    88    d88b     \
-      \       d88b    88 \n                  ,=88    Y88P            Y88P    88=,\
-      \ \n                ,d88P             _aa_             Y88b,    ___ \n     \
-      \           88P              (8888)              Y88  ad88888b \n          \
-      \      88                ~^^~                88 d88Y~~ Y8b \n         _______\
-      \ Yb._                              _.d8 d8Y      88  \n ______,d88888888ba888=,.______________________.,=8888~d88_______88___\
-      \ \n|~~~~~~88P~~~~~~Y88~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|\
-      \ \n|      88        88                                                   |\
-      \ \n|      88        88        Hello Dear Customer,                       |\
-      \ \n|      88ba,___,d8P                                                   |\
-      \ \n|       \"888888888                                                    |\
-      \ \n|          ~~~~~~                                                     |\
-      \ \n|                                                                     |\
-      \ \n|        It seems that all your precious files have been              |\
-      \ \n|                               ENCRYPTED                             |\
-      \ \n|                                                                     |\
-      \ \n|                          This is a Ransom Note                      |\
-      \ \n|               You will have to pay a lot of Virtual Money NOW       |\
-      \ \n|                                                                     |\
-      \ |_____________________________________________________________________| \n\
-      \ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n\"\
-      ; "
-    uploads: []
-    cleanup: []
-    parsers: []
-    variations: []
-    language: null
-    platform: windows
-    build_target: null
-    timeout: 10
-    additional_info: {}
-    code: null
-  name: 'Text on user''s desktop '
-  singleton: false
-  privilege: ''
-  technique_name: Malicious file
-  access: {}
-  plugin: ''
+- name: 'Text on user''s desktop '
   description: Create a text file on user's desktop
-  buckets: []
-  additional_info:
-    cleanup: '[]'
-  technique_id: T1204.002
-  delete_payload: true
   requirements: []
   repeatable: false
+  access: {}
+  plugin: ''
+  singleton: false
+  delete_payload: true
+  buckets: []
+  technique_name: Malicious file
+  executors:
+  - name: psh
+    command: "Set-Content -Path $env:USERPROFILE\\Desktop\\Read_Me.txt -Value \"\n\
+      \ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n|\
+      \                                                                          \
+      \                                                                          \
+      \                        | \n|                                             \
+      \                                                                          \
+      \                                                     | \n|                \
+      \                                                                          \
+      \                                                                          \
+      \        | \n|                                                        GREETINGS\
+      \ Dear  Customer    :-)                                                    \
+      \            | \n|                                                         \
+      \                                                                          \
+      \                                         | \n|                            \
+      \                                                                          \
+      \                                                                      | \n\
+      |                                              All your precious files are belonging\
+      \ to us                                                           | \n|    \
+      \                                                                          \
+      \                                                                          \
+      \                    | \n|                                           It seems\
+      \ that your files have been ENCRYPTED                                      \
+      \                 | \n|                                                    \
+      \                                                                          \
+      \                                              | \n|                       \
+      \           You will have to pay VIRTUAL MONEY in order to restore them    \
+      \                                  | \n|                                   \
+      \                                                                          \
+      \                                                               |\n|       \
+      \                                                                          \
+      \                                                                          \
+      \                 | \n|                                                    \
+      \              Send US money FAST                                          \
+      \                              | \n|                                       \
+      \                                                                          \
+      \                                                           | \n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
+      \ \n\"; "
+    platform: windows
+    variations: []
+    code: null
+    language: null
+    cleanup: []
+    parsers: []
+    payloads: []
+    build_target: null
+    timeout: 10
+    uploads: []
+    additional_info: {}
+  technique_id: T1204.002
+  additional_info:
+    cleanup: '[]'
+  privilege: ''
   tactic: execution
   id: note_on_user_desktop
