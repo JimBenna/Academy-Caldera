@@ -11,19 +11,6 @@
   delete_payload: true
   executors:
   - platform: windows
-    command: nltest /dsgetdc:%USERDOMAIN%
-    additional_info: {}
-    code: null
-    cleanup: []
-    timeout: 60
-    parsers: []
-    variations: []
-    payloads: []
-    language: null
-    build_target: null
-    uploads: []
-    name: cmd
-  - platform: windows
     command: nltest /dsgetdc:$env:USERDOMAIN >$env:PUBLIC\exf\Domain_controllers.txt
     additional_info: {}
     code: null
@@ -35,7 +22,7 @@
     language: null
     build_target: null
     uploads: []
-    name: psh
+    name: cmd 
   requirements: []
   repeatable: false
   description: Identify the remote domain controllers and save the information to a file
