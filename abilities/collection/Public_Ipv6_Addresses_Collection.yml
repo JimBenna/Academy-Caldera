@@ -26,5 +26,5 @@
   requirements: []
   repeatable: false
   description: collect public IPv4 and IPv6 addresess
-  name: Public IP addresses
+  name: Public IPv6 address collection
   id: Public_Ipv6_Addresses_Collection

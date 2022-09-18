@@ -26,5 +26,5 @@
   requirements: []
   repeatable: false
   description: Identify the remote domain controllers and save the information to a file
-  name: Discover domain controller
+  name: Discover Active Directory domains controllers
   id: Discover_Domain_Controllers

