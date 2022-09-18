@@ -1,0 +1,33 @@
+- requirements: []
+  technique_id: T1547.001
+  description: "Add a key in the Run hive of Windows Registry \n to enable Agent launch\
+    \ at startup "
+  privilege: ''
+  executors:
+  - uploads: []
+    code: null
+    additional_info: {}
+    parsers: []
+    name: cmd
+    timeout: 60
+    language: null
+    platform: windows
+    payloads: []
+    build_target: null
+    variations: []
+    command: REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /V "Run
+      Secret Agent" /t REG_SZ /F /D "#{location}"
+    cleanup: []
+  repeatable: false
+  additional_info: {}
+  plugin: ''
+  name: Reg key to launch Agent at startup
+  technique_name: 'Boot or Logon Autostart Execution: Registry Run Keys / Startup
+    Folder'
+  tactic: persistence 
+  access: {}
+  delete_payload: true
+  buckets:
+  - multiple
+  singleton: false
+  id: add_run_reg_key

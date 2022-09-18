@@ -23,6 +23,7 @@ atomic_ordering:
 - etl2pcap_download_and_use
 - Compress_all_directory_in_PowerShell
 - ftp_archive_exfiltration
+- add_run_reg_key
 - add_scheduled_task_at_11_45
 - note_on_user_desktop
 - ps_ransomware
