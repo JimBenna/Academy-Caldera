@@ -11,13 +11,11 @@
   delete_payload: true
   executors:
   - platform: windows
-    command: 'Invoke-RestMethod -Uri http://whatismyip.akamai.com -Outfile $env:PUBLIC\exf\pub-ipv4.txt;
-
-      Invoke-RestMethod -Uri http://ipv6.whatismyip.akamai.com -Outfile $env:PUBLIC\exf\pub-ipv6.txt;'
+    command: 'Invoke-RestMethod -Uri http://whatismyip.akamai.com -Outfile $env:PUBLIC\exf\pub-ipv4.txt'
     additional_info: {}
     code: null
     cleanup: []
-    timeout: 60
+    timeout: 10
     parsers: []
     variations: []
     payloads: []

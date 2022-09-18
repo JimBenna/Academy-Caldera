@@ -17,7 +17,7 @@
     additional_info: {}
     code: null
     cleanup: []
-    timeout: 5
+    timeout: 10
     parsers: []
     variations: []
     payloads: []

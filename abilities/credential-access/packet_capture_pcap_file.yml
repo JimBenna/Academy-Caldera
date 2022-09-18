@@ -18,7 +18,7 @@
     Invoke-Expression "netsh trace start capture=yes tracefile=$Destination_file";
     Start-Sleep -s 60;
     Invoke-Expression "netsh trace stop";'
-    timeout: '70'
+    timeout: '90'
     code: null
     parsers: []
     additional_info: {}

