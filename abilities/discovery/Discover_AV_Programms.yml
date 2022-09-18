@@ -2,7 +2,8 @@
   executors:
   - cleanup: []
     command: '$output_file="$env:PUBLIC\exf\Av_products_list.txt";
-    wmic /NAMESPACE:\\root\SecurityCenter2 PATH AntiVirusProduct GET /value >$output_file'
+    wmic /NAMESPACE:\\root\SecurityCenter2 PATH AntiVirusProduct GET /value >$output_file;
+    Get-MpComputerStatus | Out-File -Encoding ascii $env:PUBLIC\exf\Windows_Defender_status.txt'
     code: null
     build_target: null
     timeout: '10'
