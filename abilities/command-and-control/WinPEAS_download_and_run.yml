@@ -21,4 +21,4 @@ $env:PUBLIC\Toolz\winPEASany_ofs.exe | Out-File -Encoding ASCII $env:PUBLIC\exf\
   requirements: []
   access: {}
   cleanup: []
-  id: WinPEAS_downlad_and_run
+  id: WinPEAS_download_and_run
