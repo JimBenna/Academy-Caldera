@@ -18,6 +18,8 @@ atomic_ordering:
 - Public_Ipv6_Addresses_Collection
 - Domain_Trust_discover_with_encoded_command
 - view_samba_shares
+- bitsadmin_downloads_sharpersist
+- WinPEAS_download_and_run
 - Donwload_and_install_pstools
 - packet_capture_pcap_file
 - donwload_and_run_mimikatz

