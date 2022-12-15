@@ -5,9 +5,9 @@ atomic_ordering:
 - Hidden_Directory_creation
 - download_archive_with_curl
 - Extract_Archive_to_a_directory
+- add_reg_keys
 - Discover_AV_Programms
 - Identify_Firewalls
-- add_reg_keys
 - Identify_local_users
 - process_list_output_to_file
 - network_information_gathering
@@ -22,6 +22,9 @@ atomic_ordering:
 - bitsadmin_downloads_sharpersist
 - Add_service_and_startup
 - bitsadmin_downloads_WinPEAS
+- Peas_browserinfo
+- Peas_networkinfo
+- Peas_systeminfo
 - Donwload_and_install_pstools
 - packet_capture_pcap_file
 - etl2pcap_download_and_use

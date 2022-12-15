@@ -1,0 +1,35 @@
+- plugin: ''
+  description: List network informations using WinPEAS
+  delete_payload: false
+  additional_info:
+    cleanup: '[]'
+  name: WinPEAS list Network info
+  repeatable: false
+  executors:
+  - cleanup: []
+    language: null
+    parsers: []
+    variations: []
+    code: null
+    additional_info: {}
+    name: psh
+    command: "$WinPEAS = \"$env:PUBLIC\\Toolz\\winPEASany_ofs.exe\";\n$exf_file =\
+      \ \"$env:PUBLIC\\exf\\PEAS_networkinfo.log\"; \nif ([System.IO.File]::Exists(\"\
+      $WinPEAS\")) { \n$CompleteCommand= \"$WinPEAS\"+\" quiet networkinfo \"+\"log=$exf_file\"\
+      ; \nInvoke-Expression  \"$CompleteCommand\";\nexit 0; \n} \nelse { \n\"The file\
+      \ $WinPEAS does not exists !!!\" | Out-File -FilePath \"$exf_file\";\n exit\
+      \ 1; \n}; "
+    uploads: []
+    platform: windows
+    payloads: []
+    build_target: null
+    timeout: 60
+  technique_name: System Network Configuration Discovery
+  requirements: []
+  privilege: ''
+  singleton: false
+  technique_id: T1016
+  access: {}
+  buckets: []
+  tactic: discovery
+  id: Peas_networkinfo
