@@ -13,7 +13,7 @@
   executors:
   - platform: windows
     cleanup:
-    - Remove-Item -Path $env:PUBLIC\etl2pcapng.zip -Confirm
+    - Remove-Item -Path $env:PUBLIC\Toolz\etl2pcapng.zip -Confirm
     variations: []
     timeout: 60
     additional_info: {}
