@@ -21,7 +21,7 @@ atomic_ordering:
 - view_samba_shares
 - bitsadmin_downloads_sharpersist
 - Add_service_and_startup
-- bitsadmin_downloads_WinPEAS
+- WinPEAS_download_and_run
 - Peas_browserinfo
 - Peas_networkinfo
 - Peas_systeminfo
