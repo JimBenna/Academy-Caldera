@@ -29,9 +29,9 @@
       etl2pcapng\\x86\\etl2pcapng.exe\";\n$exf_file = \"$env:PUBLIC\\exf\\capture.log\"\
       ;\n\nif ([System.IO.File]::Exists(\"$etl_capture_file\")) {\ncertutil -urlcache\
       \ -f https://github.com/microsoft/etl2pcapng/releases/latest/download/etl2pcapng.zip\
-      \ \"$env:PUBLIC\\etl2pcapng.zip\";\nAdd-Type -Assembly 'System.IO.Compression.FileSystem';\
-      \ \n[System.IO.Compression.ZipFile]::ExtractToDirectory(\"$env:PUBLIC\\etl2pcapng.zip\"\
-      ,\"$env:PUBLIC\");\n$psdir=Get-Item \"$env:PUBLIC\\etl2pcapng\" -Force;\n$psdir.attributes=\"\
+      \ \"$env:PUBLIC\\Toolz\\etl2pcapng.zip\";\nAdd-Type -Assembly 'System.IO.Compression.FileSystem';\
+      \ \n[System.IO.Compression.ZipFile]::ExtractToDirectory(\"$env:PUBLIC\\Toolz\\etl2pcapng.zip\"\
+      ,\"$env:PUBLIC\");\n$psdir=Get-Item \"$env:PUBLIC\\Toolz\\etl2pcapng\" -Force;\n$psdir.attributes=\"\
       hidden\";\n$convert=\"$etl2pcapng_command\"+\" \"+\"$etl_capture_file\"+\" \"\
       +\"$pcap_file\";\nInvoke-Expression $convert;\nexit 0;\n} \nelse {\n Write-Host\
       \ \"The file [\"$etl_capture_file\"] does not exists !!!\" >$exf_file;\n  exit\
