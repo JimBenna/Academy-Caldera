@@ -1,66 +1,36 @@
-- name: 'Text on user''s desktop '
-  description: Create a text file on user's desktop
-  requirements: []
-  repeatable: false
-  access: {}
-  plugin: ''
-  singleton: false
-  delete_payload: true
-  buckets: []
-  technique_name: Malicious file
-  executors:
-  - name: psh
-    command: "Set-Content -Path $env:USERPROFILE\\Desktop\\Read_Me.txt -Value \"\n\
-      \ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n|\
-      \                                                                          \
-      \                                                                          \
-      \                        | \n|                                             \
-      \                                                                          \
-      \                                                     | \n|                \
-      \                                                                          \
-      \                                                                          \
-      \        | \n|                                                        GREETINGS\
-      \ Dear  Customer    :-)                                                    \
-      \            | \n|                                                         \
-      \                                                                          \
-      \                                         | \n|                            \
-      \                                                                          \
-      \                                                                      | \n\
-      |                                              All your precious files are belonging\
-      \ to us                                                           | \n|    \
-      \                                                                          \
-      \                                                                          \
-      \                    | \n|                                           It seems\
-      \ that your files have been ENCRYPTED                                      \
-      \                 | \n|                                                    \
-      \                                                                          \
-      \                                              | \n|                       \
-      \           You will have to pay VIRTUAL MONEY in order to restore them    \
-      \                                  | \n|                                   \
-      \                                                                          \
-      \                                                               |\n|       \
-      \                                                                          \
-      \                                                                          \
-      \                 | \n|                                                    \
-      \              Send US money FAST                                          \
-      \                              | \n|                                       \
-      \                                                                          \
-      \                                                           | \n ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
-      \ \n\"; "
-    platform: windows
+- executors:
+  - code: null
+    build_target: null
+    command: "$DownloadFile=\"https://raw.githubusercontent.com/JimBenna/fakedocs/main/Ransomware_note.txt\"\
+      ;\n$DestinationFile=\"$env:USERPROFILE\\Desktop\\Ransomware_note.txt\";\n$exf_file=\"\
+      $env:PUBLIC\\exf\\RansomWare_note.log\";\ncertutil -urlcache -f \"$DownloadFile\"\
+      \ \"$DestinationFile\";\nif ([System.IO.File]::Exists(\"$DestinationFile\"))\
+      \ { \nAdd-Content -Path $exf_file \"The file $DestinationFile has been deployed\
+      \ sucessfully\";\nexit 0;\n}; \nelse {\n  \"The file $DestinationFile does not\
+      \ exists !!!\" | Out-File -FilePath \"$exf_file\";\n  exit 1;\n};\n\n"
+    payloads: []
+    uploads: []
+    name: psh
+    parsers: []
     variations: []
-    code: null
     language: null
     cleanup: []
-    parsers: []
-    payloads: []
-    build_target: null
-    timeout: 10
-    uploads: []
     additional_info: {}
+    platform: windows
+    timeout: 10
+  access: {}
   technique_id: T1204.002
+  description: Create a text file on user's desktop
+  repeatable: false
+  buckets: []
+  singleton: false
+  name: 'Text on user''s desktop '
+  plugin: ''
+  requirements: []
+  delete_payload: true
+  tactic: execution
+  technique_name: Malicious file
+  privilege: ''
   additional_info:
     cleanup: '[]'
-  privilege: ''
-  tactic: execution
   id: note_on_user_desktop
