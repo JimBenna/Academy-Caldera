@@ -29,7 +29,7 @@ atomic_ordering:
 - packet_capture_pcap_file
 - etl2pcap_download_and_use
 - Compress_all_directory_in_PowerShell
-- curl_ftp_exfiltration_to_caldera_ftp_server
+- ftp_archive_exfiltration
 - add_run_reg_key
 - add_scheduled_task_at_11_45
 - note_on_user_desktop
