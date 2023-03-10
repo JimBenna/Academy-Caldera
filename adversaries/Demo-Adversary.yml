@@ -32,6 +32,7 @@ atomic_ordering:
 - ftp_archive_exfiltration
 - add_run_reg_key
 - add_scheduled_task_at_11_45
+- change_desktop_background
 - note_on_user_desktop
 - download_latest_mimikatz
 - ps_ransomware
