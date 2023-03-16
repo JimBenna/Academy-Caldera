@@ -1,0 +1,21 @@
+- name: Close user session
+  description: This ability closes the user's session without any warning
+  tactic: impact
+  technique_id: T1529
+  technique_name: System Shutdown/Reboot
+  executors:
+  - payloads: []
+    platform: windows
+    name: cmd
+    cleanup: []
+    parsers: []
+    command: shutdown /l /f
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: true
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  id: logoff_user

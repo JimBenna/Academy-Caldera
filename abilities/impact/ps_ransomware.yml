@@ -24,7 +24,7 @@
     parsers: []
   delete_payload: true
   privilege: ''
-  tactic: execution
+  tactic: impact
   access: {}
   plugin: ''
   repeatable: false
@@ -35,5 +35,5 @@
   name: 'PS Ransomware'
   technique_name: Data Encrypted for Impact
   singleton: false
-  description: Will encode files in fake_documents
+  description: Will encode in base64 All files located in user document directory and add a PWND suffixname 
   id: ps_ransomware
