@@ -15,8 +15,7 @@ atomic_ordering:
 - systeminfo_details_collection
 - Software_Discovery_list
 - Discover_Domain_Controllers
-- Public_Ip_Addresses_Collection
-- Public_Ipv6_Addresses_Collection
+- Public_Ip_GEOIP_list
 - Domain_Trust_discover_with_encoded_command
 - view_samba_shares
 - bitsadmin_downloads_sharpersist
