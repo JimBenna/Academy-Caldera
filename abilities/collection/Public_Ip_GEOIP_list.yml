@@ -1,0 +1,39 @@
+- requirements: []
+  executors:
+  - timeout: 10
+    payloads: []
+    variations: []
+    cleanup: []
+    parsers: []
+    build_target: null
+    command: "$IPv4LogFile=\"$env:PUBLIC\\exf\\pub-ipv4.txt\";\n$IPv6LogFile=\"$env:PUBLIC\\\
+      exf\\pub-ipv6.txt\";\ntry {\n    $IPv4Address= Invoke-RestMethod -Uri http://whatismyip.akamai.com;\n\
+      }\ncatch {\n    $MessageIPV4Error = $_\n}\ntry {\n$IPv6Address= Invoke-RestMethod\
+      \ -Uri http://ipv6.whatismyip.akamai.com/\n}\ncatch {\n    $MessageIPV6Error\
+      \ = $_\n}\nif ($IPv4Address)\n{\n Invoke-RestMethod -Method Get -Uri \"http://ip-api.com/json/$IPv4Address\"\
+      \ | Out-File -FilePath \"$IPv4LogFile\";\n}\nelse{\n    Write-Output \"$MessageIPV4Error\"\
+      \ | Out-File -FilePath \"$IPv4LogFile\";\n}\nif ($IPv6Address)\n{\n Invoke-RestMethod\
+      \ -Method Get -Uri \"http://ip-api.com/json/$IPv6Address\" | Out-File -FilePath\
+      \ \"$IPv6LogFile\";\n}\nelse{\n    Write-Output \"$MessageIPV6Error\" | Out-File\
+      \ -FilePath \"$IPv6LogFile\";\n}"
+    uploads: []
+    language: null
+    code: null
+    platform: windows
+    name: psh
+    additional_info: {}
+  repeatable: false
+  tactic: collection
+  description: collect public IPv4 and IPv6 addresess with GeoIP details
+  access: {}
+  buckets: []
+  singleton: false
+  delete_payload: true
+  plugin: ''
+  technique_id: T1134.001
+  privilege: ''
+  name: GEOIP IPv4 and IPv6 addresses
+  technique_name: System Network Configuration Discovery
+  additional_info:
+    cleanup: '[]'
+  id: Public_Ip_GEOIP_list
