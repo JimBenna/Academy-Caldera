@@ -1,0 +1,40 @@
+- additional_info:
+    cleanup: '[]'
+  description: This ability downloads an archive from github. This archive contains
+    fake documents.
+  singleton: true
+  executors:
+  - additional_info: {}
+    platform: windows
+    timeout: 60
+    cleanup: []
+    variations: []
+    name: psh
+    command: "$DestinationFile = \"$env:USERPROFILE\\Documents\\fake_Documents.zip\"\
+      ; $DownloadURL=\"https://github.com/JimBenna/fakedocs/raw/main/fake_Documents.zip\"\
+      ; \n$DownloadLogFile = \"$env:PUBLIC\\exf\\download_archive.log\";\ntry\n{\n\
+      Invoke-WebRequest -Uri $DownloadURL -outfile \"+\"$DestinationFile\"; \nWrite-Output\
+      \ \"The archive $DownloadURL has been successfully downloaded to $DestinationFile\"\
+      \ | Out-File -FilePath \"$DownloadLogFile\";\n}\ncatch\n{\n$ErrorMessage = $_;\n\
+      Write-Output \"An error occured, see error message\" | Out-File -FilePath \"\
+      $DownloadLogFile\";\nWrite-Output \"$ErrorMessage\"  | Out-File -FilePath \"\
+      $DownloadLogFile\";\n}"
+    build_target: null
+    code: null
+    language: null
+    parsers: []
+    uploads: []
+    payloads: []
+  privilege: ''
+  access: {}
+  name: Downloads archive of fakes documents from Github using native powsershell
+    command
+  delete_payload: false
+  requirements: []
+  repeatable: false
+  plugin: ''
+  tactic: command-and-control
+  technique_id: T1105
+  technique_name: Ingress Tool Transfer
+  buckets: []
+  id: download_fakes_documents

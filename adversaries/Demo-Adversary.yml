@@ -25,14 +25,14 @@ atomic_ordering:
 - Peas_networkinfo
 - Peas_systeminfo
 - Donwload_and_install_pstools
+- download_latest_mimikatz
 - packet_capture_pcap_file
 - etl2pcap_download_and_use
 - Compress_all_directory_in_PowerShell
 - ftp_archive_exfiltration
 - add_run_reg_key
 - add_scheduled_task_at_11_45
-- change_desktop_background
+- desktop_change_ps
 - note_on_user_desktop
-- download_latest_mimikatz
 - ps_ransomware
 objective: 495a9828-cab1-44dd-a0ca-66e58177d8cc
