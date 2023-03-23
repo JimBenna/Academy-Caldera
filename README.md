@@ -10,7 +10,8 @@ That simulates a full Killchain and ends with a ransomware ☠️ deployment and
 
 ## You have to install Mitre CALDERA&trade;
 :earth_americas: [Mitre CALDERA&trade; Github repository](https://github.com/mitre/caldera)
-In this page you will find how-to install this tool.
+
+See their repository on details on how to install this Adversary emulation tool.
 
 ## Clone this repository
 ```Bash
@@ -18,3 +19,5 @@ git clone https://github.com/JimBenna/Academy-Caldera.git ~/repo
 sh ~/repo/prepar_env.sh
 ```
 ## Launch Caldera
+
+and play with the adversary called 'Demo-Adversary'
