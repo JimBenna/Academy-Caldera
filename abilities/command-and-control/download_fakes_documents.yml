@@ -1,40 +1,37 @@
-- additional_info:
-    cleanup: '[]'
-  description: This ability downloads an archive from github. This archive contains
-    fake documents.
-  singleton: true
-  executors:
-  - additional_info: {}
-    platform: windows
-    timeout: 60
-    cleanup: []
-    variations: []
-    name: psh
-    command: "$DestinationFile = \"$env:USERPROFILE\\Documents\\fake_Documents.zip\"\
-      ; $DownloadURL=\"https://github.com/JimBenna/fakedocs/raw/main/fake_Documents.zip\"\
-      ; \n$DownloadLogFile = \"$env:PUBLIC\\exf\\download_archive.log\";\ntry\n{\n\
-      Invoke-WebRequest -Uri $DownloadURL -outfile \"+\"$DestinationFile\"; \nWrite-Output\
-      \ \"The archive $DownloadURL has been successfully downloaded to $DestinationFile\"\
-      \ | Out-File -FilePath \"$DownloadLogFile\";\n}\ncatch\n{\n$ErrorMessage = $_;\n\
-      Write-Output \"An error occured, see error message\" | Out-File -FilePath \"\
-      $DownloadLogFile\";\nWrite-Output \"$ErrorMessage\"  | Out-File -FilePath \"\
-      $DownloadLogFile\";\n}"
-    build_target: null
-    code: null
-    language: null
-    parsers: []
-    uploads: []
-    payloads: []
+- technique_name: Ingress Tool Transfer
+  requirements: []
   privilege: ''
-  access: {}
+  delete_payload: false
+  additional_info:
+    cleanup: '[]'
+  repeatable: false
   name: Downloads archive of fakes documents from Github using native powsershell
     command
-  delete_payload: false
-  requirements: []
-  repeatable: false
+  description: This ability downloads an archive from github. This archive contains
+    fake documents.
+  buckets: []
+  technique_id: T1105
+  singleton: true
+  executors:
+  - parsers: []
+    variations: []
+    build_target: null
+    cleanup: []
+    platform: windows
+    additional_info: {}
+    code: null
+    name: psh
+    language: null
+    uploads: []
+    timeout: 60
+    command: "$DestinationFile = \"$env:USERPROFILE\\Documents\\fake_Documents.zip\"\
+      ; \n$DownloadURL = \"https://github.com/JimBenna/fakedocs/raw/main/fake_Documents.zip\"\
+      ; \n$DownloadLogFile = \"$env:PUBLIC\\exf\\download_archive.log\";\nInvoke-WebRequest\
+      \ -Uri \"$DownloadURL\" -outfile \"$DestinationFile\"; \nWrite-Output \"The\
+      \ archive $DownloadURL has been successfully downloaded to $DestinationFile\"\
+      \ | Out-File -FilePath \"$DownloadLogFile\";"
+    payloads: []
   plugin: ''
   tactic: command-and-control
-  technique_id: T1105
-  technique_name: Ingress Tool Transfer
-  buckets: []
+  access: {}
   id: download_fakes_documents
