@@ -3,7 +3,7 @@ name: Demo-Adversary
 description: Adversary pour l'academy
 atomic_ordering:
 - Hidden_Directory_creation
-- download_archive_with_curl
+- download_fakes_documents
 - Extract_Archive_to_a_directory
 - add_reg_keys
 - Discover_AV_Programms
