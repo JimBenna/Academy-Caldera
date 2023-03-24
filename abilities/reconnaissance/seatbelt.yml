@@ -1,0 +1,30 @@
+- name: SeatBelt
+  description: Reconnaissance using seatbelt
+  tactic: reconnaissance
+  technique_id: T1592.004
+  technique_name: 'Gather Victim Host Information: Client Configurations'
+  executors:
+  - payloads: []
+    platform: windows
+    name: psh
+    cleanup: []
+    parsers: []
+    command: "$Seatbelt = \"$env:PUBLIC\\Toolz\\Seatbelt.exe\";\n$SeatbeltLogFile\
+      \ = \"$env:PUBLIC\\exf\\Seatbelt.log\";\n$SeatbeltULogFile = \"$env:PUBLIC\\\
+      exf\\Seatbelt-user.log\";\n$SeatbeltSLogFile = \"$env:PUBLIC\\exf\\Seatbelt-system.log\"\
+      ;\nif ([System.IO.File]::Exists(\"$Seatbelt\")) \n{\nWrite-Output \"GREAT. The\
+      \ command $Seatbelt has been found :-)\" | Out-File -FilePath \"$SeatbeltLogFile\"\
+      ;\n$ServiceCmd = \"$Seatbelt -group=user -outputfile=$SeatbeltULogFile\";\n\
+      Invoke-Expression \"$ServiceCmd\";\n$ServiceCmd = \"$Seatbelt -group=system\
+      \ -outputfile=$SeatbeltSLogFile\";\nInvoke-Expression \"$ServiceCmd\";\nexit\
+      \ 0;\n}\nelse \n{\nWrite-Output \"The command $Seatbelt does not exists !!!\"\
+      \ | Out-File -FilePath \"$SeatbeltLogFile\";\nexit 1;\n};"
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: true
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  id: seatbelt
