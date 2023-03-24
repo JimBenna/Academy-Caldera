@@ -31,6 +31,7 @@ atomic_ordering:
 - download_tools
 - sauron
 - sharpkatz
+- seatbelt
 - Compress_all_directory_in_PowerShell
 - ftp_archive_exfiltration
 - add_run_reg_key
