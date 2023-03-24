@@ -28,6 +28,7 @@ atomic_ordering:
 - download_latest_mimikatz
 - packet_capture_pcap_file
 - etl2pcap_download_and_use
+- download_tools
 - Compress_all_directory_in_PowerShell
 - ftp_archive_exfiltration
 - add_run_reg_key
