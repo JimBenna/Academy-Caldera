@@ -15,7 +15,7 @@
       \ -FilePath \"$SauronEyeLogFile\";\n$ServiceCmd = \"$Sauron --filetypes .txt\
       \ .doc .docx .xls --contents --keywords password pass* Pas* -v -s\";\nInvoke-Expression\
       \ \"$ServiceCmd\"  | Out-File -FilePath \"$SauronEyeLogFile\" -Append;\nexit\
-      \ 0;\n}\nelse \n{\nWrite-Output \"The command $SharPersist does not exists !!!\"\
+      \ 0;\n}\nelse \n{\nWrite-Output \"The command $Sauron does not exists !!!\"\
       \ | Out-File -FilePath \"$SauronEyeLogFile\";\nexit 1;\n};"
   repeatable: false
   additional_info: {}
